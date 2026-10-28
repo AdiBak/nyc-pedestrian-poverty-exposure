@@ -89,3 +89,13 @@ def test_leave_one_borough_out_covers_each_borough():
     d = simulate(n=4000, seed=6)
     out = rb.leave_one_borough_out(d, 'harm')
     assert sorted(out['without']) == sorted(NYC_COUNTIES.values())
+
+
+def test_prepare_frame_fills_missing_injured_counts():
+    import numpy as np
+    import pandas as pd
+    from nycped import models as m
+    df = pd.DataFrame({'harm': [1, 0], 'injured': [2.0, np.nan], 'site_vol': [10.0, 20.0], 'max_width': [30.0, 30.0],
+                       'max_speed': [25.0, 25.0], 'max_lanes': [2, 2], 'Walk_Share': [1.0, 2.0],
+                       'Transit_Share': [1.0, 2.0], 'Commercial_Share': [1.0, 2.0], 'n_cross': [1, 2]})
+    assert m.prepare_frame(df)['injured'].tolist() == [2.0, 0.0]

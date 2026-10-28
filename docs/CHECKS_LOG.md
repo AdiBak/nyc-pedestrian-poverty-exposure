@@ -31,7 +31,7 @@ The centerline file flags designated truck routes. A site counts as a truck rout
 | Sites on no truck route | 31,653 | 1.13 (1.09 to 1.18) |
 | Sites on a truck route | 6,822 | 1.20 (1.16 to 1.25) |
 
-Truck route sites carry 1.48 times the harm of other sites after the other controls. Adding the flag leaves the poverty ratio unchanged. The ratio is somewhat larger on truck routes. I did not use the snow priority codes in the centerline file, because their meaning could not be confirmed.
+Truck route sites carry 1.47 times the harm of other sites after the other controls. Adding the flag leaves the poverty ratio unchanged. The ratio is somewhat larger on truck routes. I did not use the snow priority codes in the centerline file, because their meaning could not be confirmed.
 
 ## 3. Sampling error in the ACS tract poverty rate
 

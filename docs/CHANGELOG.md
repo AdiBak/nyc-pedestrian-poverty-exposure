@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.1, 28 October 2026
+
+- Fixed the paper command failing on the pedestrians injured check. Sites with no assigned crash had a missing injured count, and the loader now treats it as zero. Added a test.
+- Colab rebuild on 28 October gave 38,477 sites. Truck route sites carry 1.47 times the harm, not 1.48.
+
 ## 0.4.0, 28 October 2026
 
 - New command paper. It writes the paper's tables (`table_main.tex`, `table_scale.tex`), the robustness figure, `robustness.csv` and `numbers.json` from a site table, so each number in the paper traces to code. Pass `--crashes` and `--tract-table` to include the site definition checks, which rebuild the site table at other grouping distances and crash radii.

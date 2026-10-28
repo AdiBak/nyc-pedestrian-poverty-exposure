@@ -31,6 +31,8 @@ def prepare_frame(df: pd.DataFrame) -> pd.DataFrame:
     d = df.copy()
     rename = {'harm_crashes': 'harm', 'ped_killed': 'killed', 'ped_injured': 'injured'}
     d = d.rename(columns={k: v for k, v in rename.items() if k in d.columns and v not in d.columns})
+    if 'injured' in d:
+        d['injured'] = d['injured'].fillna(0)  # sites with no assigned crash
     if 'log_vol' not in d:
         d['log_vol'] = np.log(d['site_vol'].clip(lower=1))
     if 'width10' not in d:

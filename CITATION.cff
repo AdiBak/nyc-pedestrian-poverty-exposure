@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this code, please cite it as below."
 title: "NYC pedestrian harm, neighborhood poverty and pedestrian exposure"
 type: software
-version: 0.4.0
+version: 0.4.1
 date-released: "2026-10-28"
 license: MIT
 repository-code: "https://github.com/AdiBak/nyc-pedestrian-poverty-exposure"
