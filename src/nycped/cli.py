@@ -28,7 +28,7 @@ def cmd_fetch(args, s: Settings):
         print(f"{name}: {e['bytes'] / 1e6:.1f} MB, sha256 {e['sha256'][:12]}, from {e['url'][:60]}")
 
 
-def cmd_sites(args, s: Settings):
+def build_site_table(s: Settings, crashes_csv, tract_table_csv):
     """Build the site table from the NYC Walks file, centerlines, the crash export and the tract table."""
     geojson = ex.extract_walks_geojson(s.path('supp_data_1_network.zip'), s.path('cache'))
     seg = ex.read_walks(geojson)
@@ -37,15 +37,51 @@ def cmd_sites(args, s: Settings):
     sites = ex.build_sites(cross, s.site_eps_m)
     print(f'crosswalk segments: {len(cross)} | sites: {len(sites)}')
     tracts = ex.read_nyc_tracts(s.path('ny_tracts2020.zip'))
-    tract_table = pd.read_csv(args.tract_table, dtype={'GEOID': str})
+    tract_table = pd.read_csv(tract_table_csv, dtype={'GEOID': str})
     sites = ex.attach_tracts(sites, tracts, tract_table)
-    pts = cr.load_ped_harm_crashes(args.crashes)
+    pts = cr.load_ped_harm_crashes(crashes_csv)
     assigned, share = cr.assign_to_sites(pts, ex.site_points(sites), s.crash_radius_m)
     counts = cr.site_counts(assigned, s.years)
     d = sitedata.make_site_dataset(sites, counts, s.years)
+    return d, share
+
+
+def cmd_sites(args, s: Settings):
+    d, share = build_site_table(s, args.crashes, args.tract_table)
     out = s.path('site_dataset.csv')
     d.to_csv(out, index=False)
     print(f'sites in the model: {len(d)} | crashes assigned: {share:.1%} | saved to {out}')
+
+
+def cmd_paper(args, s: Settings):
+    """Write the paper's tables, numbers and robustness figure from a site table."""
+    from dataclasses import replace
+    from . import paper
+    d = _load_sites(args.sites)
+    t = sc.tract_frame(d)
+    nbrs = None
+    tract_zip = s.path('ny_tracts2020.zip')
+    if tract_zip.exists() and not args.skip_scale:
+        tracts = ex.read_nyc_tracts(tract_zip)
+        nbrs = sc.adjacency(tracts, list(t['GEOID']), dict(zip(t['GEOID'], t['county'])))
+    else:
+        print('Skipping the scale table. It needs ny_tracts2020.zip, which fetch downloads.')
+    moe = pd.read_csv(args.poverty_moe, dtype={'GEOID': str}) if args.poverty_moe else None
+    definitions = None
+    if args.crashes and args.tract_table:
+        definitions = {}
+        for label, kw in [('Crash radius 20 m', {'crash_radius_m': 20.0}), ('Crash radius 50 m', {'crash_radius_m': 50.0}),
+                          ('Site grouping 15 m', {'site_eps_m': 15.0}), ('Site grouping 40 m', {'site_eps_m': 40.0})]:
+            dd, _ = build_site_table(replace(s, **kw), args.crashes, args.tract_table)
+            dd = m.prepare_frame(dd)
+            definitions[label] = m.rr_per10(m.fit_poisson(dd, 'harm', m.rhs_for(m.PRIMARY)))[0]
+            print(f'{label}: {definitions[label]:.3f}')
+    else:
+        print('Skipping the site definition checks. Pass --crashes and --tract-table to include them.')
+    numbers = paper.build_outputs(d, args.out, s.years, nbrs=nbrs, tract_frame=t, poverty_moe=moe,
+                                  definitions=definitions, draws=args.draws, boot=args.boot, perm=args.perm, seed=s.seed)
+    print(f"wrote tables, figure and numbers.json to {args.out}")
+    print(f"primary harm ratio {m.fmt_rr(numbers['main'][m.PRIMARY]['harm_poisson'])}")
 
 
 def cmd_models(args, s: Settings):
@@ -148,6 +184,16 @@ def main(argv=None) -> int:
     p = sub.add_parser('sites', help='build the site table')
     p.add_argument('--crashes', required=True, help='ped_harm_crashes.csv')
     p.add_argument('--tract-table', required=True, help='tract_table.csv')
+    p = sub.add_parser('paper', help='write the paper tables, figure and numbers.json')
+    p.add_argument('--sites', required=True, help='site table CSV')
+    p.add_argument('--out', default='paper/generated', help='output folder')
+    p.add_argument('--poverty-moe', default=None, help='CSV with GEOID and poverty_moe')
+    p.add_argument('--crashes', default=None, help='ped_harm_crashes.csv, for the site definition checks')
+    p.add_argument('--tract-table', default=None, help='tract_table.csv, for the site definition checks')
+    p.add_argument('--draws', type=int, default=100)
+    p.add_argument('--boot', type=int, default=300)
+    p.add_argument('--perm', type=int, default=199)
+    p.add_argument('--skip-scale', action='store_true')
     for name, helptext in [('models', 'primary models and the frequency and severity split'),
                            ('robustness', 'measurement error, periods and leave one borough out'),
                            ('scale', 'scale and zone effects'),
@@ -166,7 +212,7 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
     s = Settings()
     handler = {'fetch': cmd_fetch, 'sites': cmd_sites, 'models': cmd_models, 'robustness': cmd_robustness,
-               'scale': cmd_scale, 'checks': cmd_checks, 'verify': cmd_verify}[args.command]
+               'scale': cmd_scale, 'checks': cmd_checks, 'verify': cmd_verify, 'paper': cmd_paper}[args.command]
     result = handler(args, s)
     return int(result or 0)
 

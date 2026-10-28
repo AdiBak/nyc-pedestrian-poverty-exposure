@@ -36,7 +36,7 @@ def assign_to_sites(crash_pts: gpd.GeoDataFrame, site_pts: gpd.GeoDataFrame, rad
 
 def site_counts(assigned: pd.DataFrame, years) -> pd.DataFrame:
     """Harm crashes and deaths per site, in total and by year (columns y2019... and k2019...)."""
-    tot = assigned.groupby('site').agg(harm=('site', 'size'), killed=('ped_kill', 'sum'))
+    tot = assigned.groupby('site').agg(harm=('site', 'size'), killed=('ped_kill', 'sum'), injured=('ped_inj', 'sum'))
     hy = assigned.groupby(['site', 'year']).size().unstack(fill_value=0)
     ky = assigned.groupby(['site', 'year'])['ped_kill'].sum().unstack(fill_value=0)
     out = tot.copy()

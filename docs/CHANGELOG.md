@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0, 28 October 2026
+
+- New command paper. It writes the paper's tables (`table_main.tex`, `table_scale.tex`), the robustness figure, `robustness.csv` and `numbers.json` from a site table, so each number in the paper traces to code. Pass `--crashes` and `--tract-table` to include the site definition checks, which rebuild the site table at other grouping distances and crash radii.
+- The site table now carries a `injured` column, so the pedestrians injured check runs from the site table.
+- The `paper/` folder holds the LaTeX draft. Its `generated/` files are placeholders until the command has run on the final site table.
+
 ## 0.3.1, 28 October 2026
 
 - The sampling error check now reports the reliability of the poverty rate among tracts alike on the other controls, 0.689, next to the unconditional 0.786.

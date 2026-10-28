@@ -99,16 +99,7 @@ Table~\ref{tab:main} shows the poverty rate ratio as controls enter. With only c
 \caption{Poverty rate ratio per 10 point increase in tract poverty, with 95 percent intervals. Poisson regression with standard errors clustered by ZIP area. Harm crashes: 38,477 sites, 30,866 crashes. Deaths: 411 deaths.}
 \label{tab:main}
 \small
-\begin{tabular}{lccc}
-\toprule
-Model & Harm, Poisson & Harm, neg.\ binomial & Deaths, Poisson \\
-\midrule
-A\quad Volume only & 1.30 (1.26 to 1.35) & 1.35 (1.30 to 1.41) & 1.28 (1.18 to 1.39) \\
-B\quad + street design & 1.28 (1.23 to 1.32) & 1.33 (1.27 to 1.39) & 1.26 (1.16 to 1.37) \\
-C\quad + tract controls & 1.15 (1.11 to 1.18) & 1.15 (1.11 to 1.19) & 1.23 (1.11 to 1.36) \\
-D\quad + borough (primary) & 1.16 (1.12 to 1.20) & 1.17 (1.12 to 1.21) & 1.29 (1.17 to 1.42) \\
-\bottomrule
-\end{tabular}
+\input{generated/table_main.tex}
 \end{table}
 
 In model D, wider streets carry more harm: 26 percent more per additional 10 ft of street width (1.26, 1.21 to 1.31), 9 percent more per travel lane (1.09, 1.04 to 1.15), and 24 percent more per 5 mph of posted speed (1.24, 1.08 to 1.41). Posted speed barely varies in the city, so the speed estimate deserves caution. The volume elasticity is 0.79, meaning harm rises less than proportionally with pedestrian volume. Standardized tract transit share has a large coefficient (1.40 per SD, 1.34 to 1.46), walking share a moderate one (1.11), and commercial share a small negative one (0.93). The poverty gradient does not vary with volume (interaction $p=0.50$) and is slightly smaller on wider streets, by about 3 percent per 10 ft.
@@ -118,7 +109,7 @@ Figure~\ref{fig:robust} summarizes the checks. The ratio stays between 1.10 and 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/robustness.pdf}
+\includegraphics[width=0.85\textwidth]{generated/robustness.pdf}
 \caption{Poverty rate ratio per 10 points across robustness checks. Bars are 95 percent intervals where the check reports one. Open circles are point estimates. The dotted line marks the primary estimate of 1.16.}
 \label{fig:robust}
 \end{figure}
@@ -146,21 +137,7 @@ Table~\ref{tab:scale} aggregates the same data to larger zones. With residents o
 \caption{Poverty rate ratio per 10 points at different zone scales. Poisson regression. ``Residents only'' uses log population, commuting shares, and borough. ``With exposure'' adds log crossing volume and volume-weighted street width, lanes, and speed. Random zones show the median over 100 draws.}
 \label{tab:scale}
 \small\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcccc}
-\toprule
- & \multicolumn{2}{c}{Harm crashes} & \multicolumn{2}{c}{Deaths} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}
-Scale & Residents only & With exposure & Residents only & With exposure \\
-\midrule
-Tracts (2,183) & 1.06 (1.02 to 1.10) & 1.13 (1.10 to 1.16) & 1.16 (1.05 to 1.29) & 1.23 (1.12 to 1.36) \\
-ZIP areas (183) & 1.09 (1.01 to 1.16) & 1.20 (1.12 to 1.29) & 1.16 (1.00 to 1.36) & 1.25 (1.04 to 1.50) \\
-Random, 2 tracts & 1.06 & 1.15 & 1.15 & 1.24 \\
-Random, 3 tracts & 1.06 & 1.16 & 1.12 & 1.21 \\
-Random, 5 tracts & 1.07 & 1.17 & 1.12 & 1.19 \\
-Random, 9 tracts & 1.07 & 1.18 & 1.10 & 1.19 \\
-Random, 14 tracts & 1.07 & 1.18 & 1.07 & 1.15 \\
-\bottomrule
-\end{tabular}
+\input{generated/table_scale.tex}
 \end{table}
 
 \section{Discussion}

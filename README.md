@@ -2,7 +2,7 @@
 
 Research code for an analysis of how pedestrian harm in New York City relates to neighborhood poverty once pedestrian exposure and street design are accounted for. The analysis extends a Transportation Data Science Project (TDSP) Navigator notebook. A preprint is in preparation.
 
-**Status.** Version 0.3.1. The analysis is a Python package, `nycped`, with unit tests and a command line. See "What has been verified" below for what has and has not been run.
+**Status.** Version 0.4.0. The analysis is a Python package, `nycped`, with unit tests and a command line. See "What has been verified" below for what has and has not been run.
 
 ## Main findings
 
@@ -67,6 +67,7 @@ python -m nycped models --sites site_dataset.csv
 | `robustness` | Measurement error in the volumes, time periods, leave one borough out |
 | `scale` | Tracts, ZIP areas and random contiguous zones |
 | `checks` | Spatial dependence, truck routes and sampling error in the ACS poverty rate |
+| `paper` | Writes the paper's tables, robustness figure and `numbers.json` into `paper/generated` |
 | `verify` | Compares a fresh fit with the stored expected values |
 
 ## What has been verified
