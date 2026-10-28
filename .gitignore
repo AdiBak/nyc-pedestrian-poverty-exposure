@@ -1,0 +1,17 @@
+# Data and large files stay out of the repository
+data/*
+!data/README.md
+*.csv
+*.geojson
+*.zip
+*.parquet
+
+# Secrets and local files
+.env
+*.key
+
+# Python and notebook clutter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
