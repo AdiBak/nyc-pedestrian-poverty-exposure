@@ -11,7 +11,8 @@ from nycped.config import PROJECTED_CRS, VOLUME_WEEKDAY, VOLUME_WEEKEND
 def toy_streets():
     return gpd.GeoDataFrame(
         {'rw_type': [1, 6, 1], 'status': [2, 2, 2], 'trafdir': ['TW', 'NV', 'TW'],
-         'streetwidth': [30, 15, 36], 'posted_speed': [25, np.nan, 30], 'number_travel_lanes': [2, 1, 3]},
+         'streetwidth': [30, 15, 36], 'posted_speed': [25, np.nan, 30], 'number_travel_lanes': [2, 1, 3],
+         'truck_route_type': ['2', None, None]},
         geometry=[LineString([(0, 0), (200, 0)]), LineString([(100, -50), (100, 50)]),
                   LineString([(0, 500), (200, 500)])], crs=PROJECTED_CRS)
 
@@ -75,3 +76,11 @@ def test_attach_tracts_drops_sites_outside_the_table():
     out = ex.attach_tracts(sites, tracts, table)
     assert len(out) == 1
     assert out['county'].iloc[0] == 'Manhattan'
+
+
+def test_truck_route_flag_reaches_crossings_and_sites():
+    streets = ex.filter_streets(toy_streets())
+    cross = ex.infer_crosswalks(toy_segments(), streets)
+    assert (cross['truck'] == 1).all()
+    sites = ex.build_sites(cross, eps_m=25)
+    assert (sites['any_truck'] == 1).all()

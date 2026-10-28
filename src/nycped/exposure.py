@@ -55,10 +55,12 @@ def filter_streets(cl: gpd.GeoDataFrame, street_types=(1,)) -> gpd.GeoDataFrame:
     for c in ['rw_type', 'status', 'streetwidth', 'posted_speed', 'number_travel_lanes']:
         cl[c] = pd.to_numeric(cl[c], errors='coerce')
     keep = (cl['status'] == 2) & cl['rw_type'].isin(list(street_types)) & (cl['trafdir'] != 'NV')
-    return cl.loc[keep, ['streetwidth', 'posted_speed', 'number_travel_lanes', 'geometry']]
+    cl['truck'] = cl['truck_route_type'].notna().astype(int) if 'truck_route_type' in cl.columns else 0
+    return cl.loc[keep, ['streetwidth', 'posted_speed', 'number_travel_lanes', 'truck', 'geometry']]
 
 
-STREET_COLUMNS = ['rw_type', 'status', 'trafdir', 'streetwidth', 'posted_speed', 'number_travel_lanes']
+STREET_COLUMNS = ['rw_type', 'status', 'trafdir', 'streetwidth', 'posted_speed', 'number_travel_lanes',
+                  'truck_route_type']
 
 
 def read_streets(path, street_types=(1,)) -> gpd.GeoDataFrame:
@@ -75,7 +77,11 @@ def infer_crosswalks(seg: gpd.GeoDataFrame, streets: gpd.GeoDataFrame) -> gpd.Ge
     hit = gpd.sjoin(seg[['seg_id', 'geometry']], streets, how='inner', predicate='intersects')
     widest = (hit.sort_values('streetwidth', ascending=False, na_position='last')
               .drop_duplicates('seg_id')[['seg_id', 'streetwidth', 'posted_speed', 'number_travel_lanes']])
-    return seg.merge(widest, on='seg_id', how='inner')
+    cross = seg.merge(widest, on='seg_id', how='inner')
+    if 'truck' in hit.columns:  # a crosswalk touches a truck route if any street it crosses is one
+        cross = cross.merge(hit.groupby('seg_id')['truck'].max().rename('truck'), left_on='seg_id',
+                            right_index=True, how='left')
+    return cross
 
 
 def build_sites(cross: gpd.GeoDataFrame, eps_m: float = 25.0) -> pd.DataFrame:
@@ -86,10 +92,12 @@ def build_sites(cross: gpd.GeoDataFrame, eps_m: float = 25.0) -> pd.DataFrame:
     cr = pd.DataFrame({'site': labels, 'x': xy[:, 0], 'y': xy[:, 1], 'vol_peak': cross['vol_peak'].values,
                        'w': cross['streetwidth'].values, 's': cross['posted_speed'].values,
                        'l': cross['number_travel_lanes'].values})
-    return (cr.groupby('site')
-            .agg(n_cross=('vol_peak', 'size'), site_vol=('vol_peak', 'sum'), max_width=('w', 'max'),
+    named = dict(n_cross=('vol_peak', 'size'), site_vol=('vol_peak', 'sum'), max_width=('w', 'max'),
                  max_speed=('s', 'max'), max_lanes=('l', 'max'), x=('x', 'mean'), y=('y', 'mean'))
-            .reset_index())
+    if 'truck' in cross.columns:
+        cr['truck'] = cross['truck'].values
+        named['any_truck'] = ('truck', 'max')
+    return cr.groupby('site').agg(**named).reset_index()
 
 
 def site_points(sites: pd.DataFrame) -> gpd.GeoDataFrame:

@@ -145,3 +145,47 @@ def cluster_bootstrap(d: pd.DataFrame, y: str = 'killed', rhs: str | None = None
     lo, hi = np.percentile(np.exp(10 * np.array(draws)), [2.5, 97.5])
     return {'point': float(np.exp(10 * b0[i_pov])), 'lo': float(lo), 'hi': float(hi), 'n_ok': len(draws),
             'n_clusters': len(rows_by_cluster)}
+
+
+def poisson_fixed_effects(X: np.ndarray, y: np.ndarray, fe, iters: int = 60, tol: float = 1e-10,
+                          small_sample: bool = True) -> dict:
+    """Poisson regression with one set of fixed effects, with standard errors clustered on those same groups.
+
+    X must not contain an intercept, because the fixed effects absorb it. The fixed effects are eliminated
+    analytically, so memory use stays small even with hundreds of groups. This is the lean route for the
+    ZIP area fixed effects check, validated against the dense statsmodels fit in the tests.
+    """
+    fe = np.asarray(fe)
+    n, k = X.shape
+    G = int(fe.max()) + 1
+    beta = np.zeros(k)
+    ybar = np.bincount(fe, weights=y, minlength=G) / np.maximum(np.bincount(fe, minlength=G), 1)
+    alpha = np.log(np.maximum(ybar, 1e-3))
+    for _ in range(iters):
+        eta = X @ beta + alpha[fe]
+        mu = np.exp(np.clip(eta, -20, 20))
+        z = eta + (y - mu) / mu
+        XtWX = (X.T * mu) @ X
+        XtWD = np.vstack([np.bincount(fe, weights=mu * X[:, c], minlength=G) for c in range(k)])
+        dw = np.bincount(fe, weights=mu, minlength=G)
+        XtWz = X.T @ (mu * z)
+        DtWz = np.bincount(fe, weights=mu * z, minlength=G)
+        S = XtWX - (XtWD / dw) @ XtWD.T
+        new_beta = np.linalg.solve(S, XtWz - (XtWD / dw) @ DtWz)
+        alpha = (DtWz - XtWD.T @ new_beta) / dw
+        done = np.max(np.abs(new_beta - beta)) < tol
+        beta = new_beta
+        if done:
+            break
+    mu = np.exp(np.clip(X @ beta + alpha[fe], -20, 20))
+    XtWX = (X.T * mu) @ X
+    XtWD = np.vstack([np.bincount(fe, weights=mu * X[:, c], minlength=G) for c in range(k)])
+    dw = np.bincount(fe, weights=mu, minlength=G)
+    S = XtWX - (XtWD / dw) @ XtWD.T
+    Sinv = np.linalg.inv(S)
+    r = y - mu
+    cluster_scores = np.vstack([np.bincount(fe, weights=r * X[:, c], minlength=G) for c in range(k)]).T
+    meat = cluster_scores.T @ cluster_scores
+    adj = (G / (G - 1)) * ((n - 1) / (n - k - G)) if small_sample else 1.0
+    cov = adj * Sinv @ meat @ Sinv
+    return {'beta': beta, 'se': np.sqrt(np.diag(cov)), 'groups': G}

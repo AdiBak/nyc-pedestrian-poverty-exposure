@@ -58,6 +58,8 @@ crosswalk segments: 110603 | sites: 41937
 sites in the model: 38477 | crashes assigned: 81.9% | saved to .../site_dataset.csv
 ```
 
+The number of sites in the model can differ by a few sites, for example 38,475, depending on library versions. The sites involved have no crashes, and the estimates agree to four decimals.
+
 ## 5. Check the results
 
 ```
@@ -67,7 +69,7 @@ python -m nycped verify --sites "$NYCPED_DATA_DIR/site_dataset.csv"
 All six checks should print PASS.
 
 ```
-PASS  n_sites: got 38477.0000, expected 38477 (tolerance 0)
+PASS  n_sites: got 38477.0000, expected 38477 (tolerance 5)
 PASS  harm_poverty_rr_primary: got 1.1612, expected 1.16 (tolerance 0.01)
 PASS  deaths_poverty_rr_primary: got 1.2880, expected 1.29 (tolerance 0.02)
 PASS  volume_elasticity_primary: got 0.7915, expected 0.79 (tolerance 0.02)

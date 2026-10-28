@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0, 28 October 2026
+
+- New command checks, with the checks a reviewer is likely to ask for. Moran I of the residuals, standard errors clustered at several spatial scales, a spatial block bootstrap, ZIP area fixed effects, a truck route proxy for heavy vehicle traffic, and sensitivity to sampling error in the ACS poverty rate. Results are in docs/CHECKS_LOG.md.
+- The site table now carries any_truck, from the centerline truck route field. Rebuild it with the sites command to get it.
+- A lean fixed effects estimator, poisson_fixed_effects, tested against statsmodels.
+- scripts/01_export_tract_poverty_moe.py pulls tract poverty margins of error through the Census API, for the sampling error check.
+- verify allows a difference of five sites. Python 3.13 gave 38,475 sites and Colab 38,477, with identical estimates to four decimals.
+
 ## 0.2.1, 28 October 2026
 
 - Added `docs/REPRODUCE.md`, a five step guide with expected output from the confirmed end to end run.

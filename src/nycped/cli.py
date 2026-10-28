@@ -8,6 +8,7 @@ from importlib import resources
 import pandas as pd
 
 from . import crashes as cr
+from . import diagnostics as dg
 from . import exposure as ex
 from . import models as m
 from . import robustness as rb
@@ -85,6 +86,36 @@ def cmd_scale(args, s: Settings):
     print(sc.random_zonings(t, nbrs, n_draws=args.draws, seed=11).round(3).to_string(index=False))
 
 
+def cmd_checks(args, s: Settings):
+    """Checks a reviewer is likely to ask for. Spatial dependence, truck routes and ACS sampling error."""
+    d = _load_sites(args.sites)
+    print('1. Spatial dependence')
+    for scale_name, v in dg.residual_autocorrelation(d, n_perm=args.perm).items():
+        print(f"  Moran's I of model residuals, {scale_name}: {v['I']:.4f} (expected {v['expected']:.4f}, "
+              f"permutation p = {v['p_value']:.3f})")
+    print('\n  Poverty rate ratio with standard errors clustered at different scales')
+    print(dg.clustering_sensitivity(d).drop(columns=['rr', 'lo', 'hi']).to_string(index=False))
+    bb = dg.block_bootstrap(d, dg.grid_cells(d, 2000), n_boot=args.boot)
+    print(f"  Block bootstrap, {bb['blocks']} blocks of 2 km: {bb['point']:.2f} ({bb['lo']:.2f} to {bb['hi']:.2f})")
+    print(f"  Within ZIP areas only, ZIP fixed effects: {m.fmt_rr(dg.zip_fixed_effects(d))}")
+    print('\n2. Truck routes as a partial stand-in for heavy vehicle traffic')
+    if 'any_truck' in d.columns:
+        print(f"  Sites on a truck route: {d['any_truck'].mean():.1%}")
+        print(dg.truck_route_check(d).drop(columns='rr').to_string(index=False))
+    else:
+        print('  The site table has no any_truck column. Rebuild it with the sites command.')
+    print('\n3. Sampling error in the ACS tract poverty rate')
+    if args.poverty_moe:
+        moe = pd.read_csv(args.poverty_moe, dtype={'GEOID': str})
+        r = dg.poverty_error_simex(d, moe, seed=s.seed)
+        print(f"  Mean standard error {r['mean_se_points']:.2f} points, implied reliability {r['reliability']:.3f}, "
+              f"{r['tracts_missing_moe']} of {r['tracts']} tracts without a margin of error")
+        print(f"  Poverty rate ratio, naive {r['naive_rr']:.3f}, corrected {r['simex_linear_rr']:.3f} (linear) "
+              f"and {r['simex_quadratic_rr']:.3f} (quadratic)")
+    else:
+        print('  Pass --poverty-moe tract_poverty_moe.csv to run this check.')
+
+
 def cmd_verify(args, s: Settings) -> int:
     """Compare a fresh fit on a site table with the stored expected values."""
     expected = json.loads(resources.files('nycped').joinpath('expected_results.json').read_text())['checks']
@@ -119,6 +150,7 @@ def main(argv=None) -> int:
     for name, helptext in [('models', 'primary models and the frequency and severity split'),
                            ('robustness', 'measurement error, periods and leave one borough out'),
                            ('scale', 'scale and zone effects'),
+                           ('checks', 'spatial dependence, truck routes and ACS sampling error'),
                            ('verify', 'check a site table against the stored expected values')]:
         p = sub.add_parser(name, help=helptext)
         p.add_argument('--sites', required=True, help='site table CSV')
@@ -126,10 +158,14 @@ def main(argv=None) -> int:
             p.add_argument('--bootstrap', type=int, default=0, help='cluster bootstrap resamples for deaths')
         if name == 'scale':
             p.add_argument('--draws', type=int, default=100)
+        if name == 'checks':
+            p.add_argument('--perm', type=int, default=199, help='permutations for Moran I')
+            p.add_argument('--boot', type=int, default=300, help='block bootstrap resamples')
+            p.add_argument('--poverty-moe', default=None, help='CSV with GEOID and poverty_moe')
     args = parser.parse_args(argv)
     s = Settings()
     handler = {'fetch': cmd_fetch, 'sites': cmd_sites, 'models': cmd_models, 'robustness': cmd_robustness,
-               'scale': cmd_scale, 'verify': cmd_verify}[args.command]
+               'scale': cmd_scale, 'checks': cmd_checks, 'verify': cmd_verify}[args.command]
     result = handler(args, s)
     return int(result or 0)
 
