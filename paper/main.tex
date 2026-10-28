@@ -1,7 +1,7 @@
-\documentclass[11pt]{article}
+\documentclass[10pt,twocolumn]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.75in,columnsep=0.3in]{geometry}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -13,14 +13,14 @@
 \newcommand{\todo}[1]{\textbf{[TODO: #1]}}
 
 \title{Exposure-Adjusted Pedestrian Harm Is 16 Percent Higher per 10 Points of Neighborhood Poverty in New York City}
-\author{Aditya Bakshi\thanks{Independent researcher.}}
+\author{Aditya Bakshi\\\small Independent researcher}
 \date{Draft of \today}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Poorer neighborhoods are often said to carry more pedestrian harm, but residents-only rates can hide the role of how many people actually walk. I combine modeled pedestrian volumes for New York City with street centerline data and five years of police-reported crashes (2019 to 2023). I infer crosswalks, group them into 41,937 sites that are mostly intersections, and assign crashes to the nearest site. Among 38,477 sites in tracts with complete data, pedestrian harm crashes rise 16 percent per 10 point increase in the tract poverty rate (rate ratio 1.16, 95 percent interval 1.12 to 1.20) after accounting for crossing volume, street width, travel lanes, posted speed, tract commuting and land use, and borough. Without those adjustments the ratio is 1.30. The estimate holds across estimators, site definitions, time periods, boroughs, alternative standard errors, and a truck route proxy. It falls to 1.10 within ZIP areas and rises to between 1.19 and 1.22 once sampling error in the poverty rate is corrected. Pedestrian deaths show a similar gradient (1.29, 1.17 to 1.42), partly through more crashes and partly through a higher chance that a crash is fatal. A model with residents alone gives ratios of 1.06 to 1.09, so the exposure adjustment, not the choice of geography, drives the result. These are associations from observational data without vehicle traffic volumes. All code is open and rebuilds the numbers from public sources.
+Poorer neighborhoods are often said to carry more pedestrian harm, but residents-only rates can hide the role of how many people actually walk. We combine modeled pedestrian volumes for New York City with street centerline data and five years of police-reported crashes (2019 to 2023). We infer crosswalks, group them into 41,937 sites that are mostly intersections, and assign crashes to the nearest site. Among 38,477 sites in tracts with complete data, pedestrian harm crashes rise 16 percent per 10 point increase in the tract poverty rate (rate ratio 1.16, 95 percent interval 1.12 to 1.20) after accounting for crossing volume, street width, travel lanes, posted speed, tract commuting and land use, and borough. Without those adjustments the ratio is 1.30. The estimate holds across estimators, site definitions, time periods, boroughs, alternative standard errors, and a truck route proxy. It falls to 1.10 within ZIP areas and rises to between 1.19 and 1.22 once sampling error in the poverty rate is corrected. Pedestrian deaths show a similar gradient (1.29, 1.17 to 1.42), partly through more crashes and partly through a higher chance that a crash is fatal. A model with residents alone gives ratios of 1.06 to 1.09, so the exposure adjustment, not the choice of geography, drives the result. These are associations from observational data without vehicle traffic volumes. All code is open and rebuilds the numbers from public sources.
 \end{abstract}
 
 \section{Introduction}
@@ -28,7 +28,7 @@ Poorer neighborhoods are often said to carry more pedestrian harm, but residents
 
 Residents are a weak measure of exposure to pedestrian crashes. People walk where they work, shop, and change transit, not only where they live, and a rate per resident confuses how often people cross streets with how dangerous those crossings are. Recent modeled pedestrian volumes for New York City \citep{sevtsuk2026nycwalks} make it possible to account for exposure at the level of the crossing across the whole city.
 
-This paper asks one question. Does neighborhood poverty relate to pedestrian harm after accounting for how many people walk and for street design? I report two disparities. The total gap is the difference that remains with only crossing volume and street design held fixed. The residual gap is the difference that remains after tract commuting and land use are added. The two answer different questions, because transit and walking shares may sit on the causal path from poverty to exposure to harm.
+This paper asks one question. Does neighborhood poverty relate to pedestrian harm after accounting for how many people walk and for street design? We report two disparities. The total gap is the difference that remains with only crossing volume and street design held fixed. The residual gap is the difference that remains after tract commuting and land use are added. The two answer different questions, because transit and walking shares may sit on the causal path from poverty to exposure to harm.
 
 The paper makes three contributions.
 \begin{enumerate}
@@ -40,22 +40,22 @@ The paper makes three contributions.
 
 \section{Data}
 \subsection{Crashes}
-Outcomes come from the NYC Motor Vehicle Collisions Crashes file \citep{nyc_crashes}. I keep crashes from 2019 through 2023 in which at least one pedestrian was injured or killed (pedestrian harm crashes), drop crashes flagged as occurring on highways, and keep those with valid coordinates. This leaves 37,815 crashes, 469 of them fatal to a pedestrian.
+Outcomes come from the NYC Motor Vehicle Collisions Crashes file \citep{nyc_crashes}. We keep crashes from 2019 through 2023 in which at least one pedestrian was injured or killed (pedestrian harm crashes), drop crashes flagged as occurring on highways, and keep those with valid coordinates. This leaves 37,815 crashes, 469 of them fatal to a pedestrian.
 
 \subsection{Pedestrian volumes}
-Exposure comes from NYC Walks \citep{sevtsuk2026nycwalks}, which models peak-hour pedestrian volumes on 315,577 sidewalk, crosswalk, and footpath segments. The model is calibrated to New York City Department of Transportation counts from 2018 and 2019. The file gives volumes for six peak hours: weekday and weekend, morning, midday, and evening. I average the six to form one volume index per segment. This is an index of exposure, not a daily count. Because the volumes date from 2018 and 2019 while crashes run to 2023, the index assumes the relative pattern of walking across the city did not change much, which the 2020 shock makes a real concern. I return to this in the limitations.
+Exposure comes from NYC Walks \citep{sevtsuk2026nycwalks}, which models peak-hour pedestrian volumes on 315,577 sidewalk, crosswalk, and footpath segments. The model is calibrated to New York City Department of Transportation counts from 2018 and 2019. The file gives volumes for six peak hours: weekday and weekend, morning, midday, and evening. We average the six to form one volume index per segment. This is an index of exposure, not a daily count. Because the volumes date from 2018 and 2019 while crashes run to 2023, the index assumes the relative pattern of walking across the city did not change much, which the 2020 shock makes a real concern. We return to this in the limitations.
 
 \subsection{Streets, tracts, and tract covariates}
 Street width, travel lanes, posted speed, road type, and truck route class come from the NYC street centerline file \citep{nyc_centerline}. Tract poverty, population, walking share of commuting, and transit share of commuting come from the 2019 to 2023 American Community Survey five-year estimates \citep{acs2023}. The commercial share of floor area comes from PLUTO \citep{pluto}. Tracts follow the 2020 cartographic boundaries. The tract table has 2,189 tracts, and 2,183 of them contain a site.
 
 \section{Methods}
 \subsection{Inferring crosswalks and sites}
-The NYC Walks file has no field that identifies crosswalks. I infer them as pedestrian segments that intersect the centerline of an ordinary street, meaning road type 1, active status, and not marked non-vehicular. This flags 110,603 segments, 35 percent of the network. Their median length is 16.6 m, against 64.6 m for all other segments, which is consistent with crosswalks being short crossings and sidewalks and paths being long. The 25 m rule treats crosswalk midpoints within 25 m of each other as one site, using DBSCAN with a minimum of one point. This gives 41,937 sites with a median of three crosswalks per site. Crash coordinates in the source file tend to sit at the intersection center, so a site, not a single crosswalk, is the right unit.
+The NYC Walks file has no field that identifies crosswalks. We infer them as pedestrian segments that intersect the centerline of an ordinary street, meaning road type 1, active status, and not marked non-vehicular. This flags 110,603 segments, 35 percent of the network. Their median length is 16.6 m, against 64.6 m for all other segments, which is consistent with crosswalks being short crossings and sidewalks and paths being long. The 25 m rule treats crosswalk midpoints within 25 m of each other as one site, using DBSCAN with a minimum of one point. This gives 41,937 sites with a median of three crosswalks per site. Crash coordinates in the source file tend to sit at the intersection center, so a site, not a single crosswalk, is the right unit.
 
 Each site takes the sum of its crosswalk volumes, the widest street it crosses, the highest posted speed, and the most travel lanes. It takes the poverty rate and other covariates of the tract that contains it.
 
 \subsection{Assigning crashes}
-A crash belongs to the nearest site within 30 m. About 82 percent of harm crashes meet this rule. Most of the rest are mid-block. The result therefore describes harm near crossings, and I report sensitivity to radii of 20 and 50 m.
+A crash belongs to the nearest site within 30 m. About 82 percent of harm crashes meet this rule. Most of the rest are mid-block. The result therefore describes harm near crossings, and we report sensitivity to radii of 20 and 50 m.
 
 \subsection{Models}
 For site $i$ in tract $t(i)$ let $Y_i$ be the crash count over the five years. The primary model is Poisson regression with a log link,
@@ -72,35 +72,35 @@ Four specifications show how the ratio changes as controls enter.
 \item[C] Plus crosswalks per site and tract controls.
 \item[D] Plus borough effects. This is the primary specification.
 \end{description}
-Poisson estimates stay consistent under overdispersion \citep{santossilva2006log}, so I use them as primary and report standard errors clustered by ZIP area (183 clusters) \citep{cameron2015practitioner}. A negative binomial GLM with a moment-based dispersion parameter is a cross-check. Pedestrian deaths use the same specifications. To split the death gradient, I model harm crashes per site (frequency) and deaths per harm crash among sites with a crash (severity) separately.
+Poisson estimates stay consistent under overdispersion \citep{santossilva2006log}, so we use them as primary and report standard errors clustered by ZIP area (183 clusters) \citep{cameron2015practitioner}. A negative binomial GLM with a moment-based dispersion parameter is a cross-check. Pedestrian deaths use the same specifications. To split the death gradient, we model harm crashes per site (frequency) and deaths per harm crash among sites with a crash (severity) separately.
 
 \subsection{Robustness and reviewer checks}
-I run the following, each with model D unless noted.
+We run the following, each with model D unless noted.
 \begin{itemize}
 \item \emph{Definitions.} Site grouping distance of 15, 25, and 40 m. Crash assignment radius of 20, 30, and 50 m. Dropping the top 1 percent of sites by crash count.
 \item \emph{Time and place.} Two periods and each year separately, with the same volumes. Leaving out each borough in turn.
 \item \emph{Volume error.} Simulation extrapolation \citep{cook1994simex} at assumed reliabilities of 0.95 to 0.70 for log volume, in the classical-error worst case.
 \item \emph{Spatial dependence.} Moran's I \citep{moran1950notes} of residuals using 8 nearest neighbors, standard errors clustered by tract and by 1, 2, and 4 km grid cells, and a block bootstrap over 2 km blocks.
 \item \emph{Unmeasured regional factors.} ZIP area fixed effects, which use only variation among tracts in the same ZIP area.
-\item \emph{Vehicle traffic.} The data have no vehicle volumes. As a partial proxy I flag sites on a designated truck route and add the flag as a covariate, then split the sample by it.
-\item \emph{Sampling error in poverty.} The ACS reports a margin of error for each tract. I treat the margin divided by 1.645 as a known standard error and extrapolate the coefficient back to zero error.
+\item \emph{Vehicle traffic.} The data have no vehicle volumes. As a partial proxy we flag sites on a designated truck route and add the flag as a covariate, then split the sample by it.
+\item \emph{Sampling error in poverty.} The ACS reports a margin of error for each tract. We treat the margin divided by 1.645 as a known standard error and extrapolate the coefficient back to zero error.
 \item \emph{Geographic scale.} The same data aggregated to tracts, ZIP areas, and 100 random contiguous zonings at each of five target sizes \citep{fotheringham1991mup}. Two model forms are compared: residents only (log population plus walking, transit, and commercial shares and borough) and residents plus volume and design.
 \end{itemize}
 
 \section{Results}
 \subsection{Plausibility of the volumes}
-The modeled volumes should track activity, so I compared them with independent tract measures. Median volume per crossing is highest in Manhattan (290) and lower in Brooklyn (162), the Bronx (159), Queens (127), and Staten Island (110). Across tracts the rank correlation of mean volume per crossing is 0.60 with population density and 0.51 with the ACS walking share, and 0.20 with poverty. The spread across boroughs looks narrow relative to density, so volumes may be overstated in low-activity areas. I return to this under measurement error.
+The modeled volumes should track activity, so we compared them with independent tract measures. Median volume per crossing is highest in Manhattan (290) and lower in Brooklyn (162), the Bronx (159), Queens (127), and Staten Island (110). Across tracts the rank correlation of mean volume per crossing is 0.60 with population density and 0.51 with the ACS walking share, and 0.20 with poverty. The spread across boroughs looks narrow relative to density, so volumes may be overstated in low-activity areas. We return to this under measurement error.
 
 \subsection{Pedestrian harm and poverty at crossing sites}
 Table~\ref{tab:main} shows the poverty rate ratio as controls enter. With only crossing volume held fixed, harm crashes are 30 percent higher per 10 points of poverty (1.30, 1.26 to 1.35). Street design changes this little (1.28). Tract commuting and land use cut it to 1.15, and borough effects leave it at 1.16 (1.12 to 1.20). Together the controls absorb more than 40 percent of the log gap, almost all of it through the tract controls. Street design alone absorbs about 8 percent. The negative binomial cross-check gives the same ratios within 0.06.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{Poverty rate ratio per 10 point increase in tract poverty, with 95 percent intervals. Poisson regression with standard errors clustered by ZIP area. Harm crashes: 38,477 sites, 30,866 crashes. Deaths: 411 deaths.}
 \label{tab:main}
 \small
 \input{generated/table_main.tex}
-\end{table}
+\end{table*}
 
 In model D, wider streets carry more harm: 26 percent more per additional 10 ft of street width (1.26, 1.21 to 1.31), 9 percent more per travel lane (1.09, 1.04 to 1.15), and 24 percent more per 5 mph of posted speed (1.24, 1.08 to 1.41). Posted speed barely varies in the city, so the speed estimate deserves caution. The volume elasticity is 0.79, meaning harm rises less than proportionally with pedestrian volume. Standardized tract transit share has a large coefficient (1.40 per SD, 1.34 to 1.46), walking share a moderate one (1.11), and commercial share a small negative one (0.93). The poverty gradient does not vary with volume (interaction $p=0.50$) and is slightly smaller on wider streets, by about 3 percent per 10 ft.
 
@@ -109,7 +109,7 @@ Figure~\ref{fig:robust} summarizes the checks. The ratio stays between 1.10 and 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.85\textwidth]{generated/robustness.pdf}
+\includegraphics[width=\columnwidth]{generated/robustness.pdf}
 \caption{Poverty rate ratio per 10 points across robustness checks. Bars are 95 percent intervals where the check reports one. Open circles are point estimates. The dotted line marks the primary estimate of 1.16.}
 \label{fig:robust}
 \end{figure}
@@ -132,18 +132,18 @@ The frequency and severity split gives a harm crash ratio of 1.16 (1.12 to 1.20)
 \subsection{Geographic scale}
 Table~\ref{tab:scale} aggregates the same data to larger zones. With residents only, the poverty ratio for harm crashes is 1.06 to 1.09 at every scale. With volume and design it is 1.13 at tracts, 1.20 at ZIP areas, and 1.15 to 1.18 across random zonings. For a given zone size, 95 percent of random zonings span about plus or minus 0.04. The exposure adjustment, and not the geography, produces the larger estimate. For deaths the exposure-adjusted ratio drifts from 1.29 at sites and 1.23 at tracts to about 1.15 for zones of 14 tracts, and the spread across zonings widens because few deaths fall in each zone.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{Poverty rate ratio per 10 points at different zone scales. Poisson regression. ``Residents only'' uses log population, commuting shares, and borough. ``With exposure'' adds log crossing volume and volume-weighted street width, lanes, and speed. Random zones show the median over 100 draws.}
 \label{tab:scale}
 \small\setlength{\tabcolsep}{4pt}
 \input{generated/table_scale.tex}
-\end{table}
+\end{table*}
 
 \section{Discussion}
 \todo{Rewrite once the introduction exists. Points to cover: what the total gap and the residual gap each answer; why the transit coefficient is large and what it may proxy; the modeling lesson below; what the gradient does and does not say about policy.}
 
-\paragraph{A modeling lesson.} A per-resident tract model can miss a gradient that exposure reveals. A tract model of deaths with population as an exact offset and no borough effects gave a poverty ratio of 1.02 (0.92 to 1.12). With population entering freely, borough effects, and the deaths assigned to sites, tract-level ratios are 1.08 to 1.16 without volume and 1.23 with it (Appendix~\ref{app:tract}). The earlier null was fragile to specification and I do not present it as a finding. The lesson is that an offset assumes risk proportional to the denominator, and the volume elasticity of 0.79 shows that assumption does not hold.
+\paragraph{A modeling lesson.} A per-resident tract model can miss a gradient that exposure reveals. A tract model of deaths with population as an exact offset and no borough effects gave a poverty ratio of 1.02 (0.92 to 1.12). With population entering freely, borough effects, and the deaths assigned to sites, tract-level ratios are 1.08 to 1.16 without volume and 1.23 with it (Appendix~\ref{app:tract}). The earlier null was fragile to specification and we do not present it as a finding. The lesson is that an offset assumes risk proportional to the denominator, and the volume elasticity of 0.79 shows that assumption does not hold.
 
 \paragraph{Limitations.}
 \begin{itemize}
@@ -162,7 +162,7 @@ Table~\ref{tab:scale} aggregates the same data to larger zones. With residents o
 All analysis code is in the \texttt{nycped} Python package \citep{nycped_code}, with unit tests, a command line, and a five step reproduction guide. The package rebuilds the site table from three public sources (the NYC Walks supplementary network, the NYC street centerlines, and Census tract boundaries) and two small processed inputs. The processed inputs are a tract table and a table of pedestrian harm crashes, and they are deposited at \todo{Zenodo DOI}. The code is archived at \todo{Zenodo DOI}. The NYC Walks files are not redistributed, since no license is stated. Readers should download them from the source cited in \citet{sevtsuk2026nycwalks}.
 
 \section*{Use of generative AI}
-I used Claude, a large language model from Anthropic, to help plan the analysis, write and test code, check results, and draft and edit this text. I reviewed the code and the text and take responsibility for all content, including the results and any errors.
+We used Claude, a large language model from Anthropic, to help plan the analysis, write and test code, check results, and draft and edit this text. We reviewed the code and the text and take responsibility for all content, including the results and any errors.
 
 \section*{Acknowledgments}
 \todo{Thank the Northeast Big Data Innovation Hub and National Student Data Corps Transportation Data Science Project for the Navigator pathway. Confirm wording with the program. Thank the NYC Walks authors once contacted.}
@@ -173,9 +173,9 @@ I used Claude, a large language model from Anthropic, to help plan the analysis,
 \appendix
 \section{Tract-level models}
 \label{app:tract}
-Table~\ref{tab:tract} gives the tract-level models, which use the Milestone 5 tract table with crashes counted in tracts. Rate ratios are per 10 points of poverty, from negative binomial regression with standard errors clustered by ZIP area. Models 3 and 4 treat crossing volume as an exposure offset. The data reject proportional risk, so I do not rely on them.
+Table~\ref{tab:tract} gives the tract-level models, which use the Milestone 5 tract table with crashes counted in tracts. Rate ratios are per 10 points of poverty, from negative binomial regression with standard errors clustered by ZIP area. Models 3 and 4 treat crossing volume as an exposure offset. The data reject proportional risk, so we do not rely on them.
 
-\begin{table}[h]
+\begin{table*}[t]
 \centering
 \caption{Tract-level poverty rate ratios per 10 points for pedestrian injuries and deaths.}
 \label{tab:tract}
@@ -192,7 +192,7 @@ Model & Injuries & Deaths \\
 7\quad Same as 5, Staten Island excluded & 1.12 (1.08 to 1.15) & 1.07 (0.98 to 1.18) \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 In models 5 and 6 the elasticities for injuries are 0.46 for population and 0.41 for crossing volume.
 
 \end{document}
