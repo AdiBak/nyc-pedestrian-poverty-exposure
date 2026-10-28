@@ -1,13 +1,4 @@
-# Versions are not pinned yet. After a clean end to end run, pin them with
-#   pip freeze > requirements-lock.txt
-numpy
-pandas
-geopandas
-pyogrio
-shapely
-statsmodels
-scikit-learn
-scipy
-patsy
-matplotlib
-requests
+# Dependencies are declared in pyproject.toml. Install with
+#   pip install -e ".[test]"
+# The versions used for the verified run are in requirements-lock.txt.
+-e .

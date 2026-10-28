@@ -1,8 +1,8 @@
 # NYC pedestrian harm, neighborhood poverty and pedestrian exposure
 
-Research code for an analysis of how pedestrian harm in New York City relates to neighborhood poverty once pedestrian exposure and street design are accounted for. The work extends a Transportation Data Science Project (TDSP) Navigator notebook. A preprint is in preparation.
+Research code for an analysis of how pedestrian harm in New York City relates to neighborhood poverty once pedestrian exposure and street design are accounted for. The analysis extends a Transportation Data Science Project (TDSP) Navigator notebook. A preprint is in preparation.
 
-**Status.** Research code, version 0.1. The scripts were developed and run in Google Colab. Running them outside Colab has not been tested, and the Python versions are not pinned yet.
+**Status.** Version 0.2.0. The analysis is a Python package, `nycped`, with unit tests and a command line. See "What has been verified" below for what has and has not been run.
 
 ## Main findings
 
@@ -22,39 +22,79 @@ Crashes from 2019 through 2023 are assigned to 38,477 crossing sites, which are 
 
 All numbers, checks and limitations are in `docs/research_log.md`.
 
-## Repository layout
+## Quick start
 
 ```
-scripts/      Numbered scripts, in run order (Colab cells in Jupytext percent format)
-notebooks/    The TDSP Navigator notebook, with the additional work section and saved outputs
-docs/         Research log with design decisions, results and open items
-data/         Data notes only. No third-party data are stored here.
+pip install -e ".[test]"
+pytest                                   # unit tests, about 10 seconds, no data needed
+export NYCPED_DATA_DIR=/path/to/data     # any empty folder
+python -m nycped fetch                   # downloads the public sources and writes MANIFEST.json
 ```
 
-## How to run
+`fetch` records the URL, date, size and SHA-256 checksum of every file it downloads in `MANIFEST.json`, so a later run can check that it is using the same inputs.
 
-1. Put the NYC crash file (`Motor_Vehicle_Collisions_-_Crashes_20260810.csv` from NYC Open Data) in the top level of your Google Drive.
-2. Save a free Census API key in Colab Secrets as `CENSUS_API_KEY` and switch on notebook access.
-3. Create the Drive folder `MyDrive/TDSP/nyc_walks`. The scripts save and read their files there.
-4. Run the scripts in order. Scripts 00, 04, 05, 08 and 09 need the session that script 00 builds, so run them in the same Colab session, or rerun 00 first.
+## Reproducing the results
 
-| Script | What it does |
+There are two routes.
+
+**Check the numbers from a saved site table.** This needs the site table and no raw data. It reruns the primary models and compares them with the stored expected values.
+
+```
+python -m nycped verify --sites site_table.csv
+python -m nycped models --sites site_table.csv --bootstrap 500
+python -m nycped robustness --sites site_table.csv
+python -m nycped scale --sites site_table.csv
+```
+
+**Rebuild everything from the raw sources.** Two small inputs come from the original Colab notebook, because they depend on the Census API and on the NYC crash export.
+
+1. In the TDSP notebook session, after the Milestone 5 setup, run `scripts/00_export_processed_inputs.py`. It writes `tract_table.csv` and `ped_harm_crashes.csv` to your data folder. The script prints the row counts to expect.
+2. Run the package.
+
+```
+python -m nycped fetch
+python -m nycped sites --crashes ped_harm_crashes.csv --tract-table tract_table.csv
+python -m nycped models --sites site_dataset.csv
+```
+
+| Command | What it does |
 |---|---|
-| `00_setup_crash_and_acs_tables.py` | Loads crashes, recovers missing ZIPs, builds the ACS and PLUTO tract tables and the helper functions |
-| `01_download_nyc_walks.py` | Downloads the NYC Walks supplementary files into Drive |
-| `02_fetch_centerlines.py` | Downloads NYC street centerlines and prints their road types |
-| `03_crosswalk_tract_exposure.py` | Infers crosswalks and totals crossing volume by tract |
-| `04_tract_models.py` | Tract level poverty models with exposure |
-| `05_site_model_first_pass.py` | Builds sites, assigns crashes, saves the site table |
-| `06_site_models_robust.py` | Primary estimates, Poisson and negative binomial GLM, first checks |
-| `07_measurement_error_simex.py` | Sensitivity to error in the pedestrian volumes |
-| `08_robustness_checks.py` | Site definition, time period and borough |
-| `09_deaths_battery.py` | Pedestrian deaths, frequency versus severity, cluster bootstrap |
-| `10_scale_zone_analysis.py` | Scale and zone effects across tracts, ZIP areas and random zones |
+| `fetch` | Downloads the NYC Walks files, the street centerlines and the Census tract boundaries |
+| `sites` | Infers crosswalks, groups them into sites, assigns crashes and writes `site_dataset.csv` |
+| `models` | Models A to D for harm crashes and deaths, the frequency and severity split, optional cluster bootstrap |
+| `robustness` | Measurement error in the volumes, time periods, leave one borough out |
+| `scale` | Tracts, ZIP areas and random contiguous zones |
+| `verify` | Compares a fresh fit with the stored expected values |
 
-Script 05 fits its first models with negative binomial maximum likelihood, which did not converge for one specification. Script 06 replaces those estimates, so read 06, not 05.
+## What has been verified
 
-Scripts 05, 08 and 09 read a 275 MB file and rebuild the sites, so each takes several minutes.
+Run in Python 3.13 with the versions in `requirements-lock.txt`.
+
+- The unit tests pass. They use small synthetic examples with known answers, including recovery of a known poverty effect and checks of the crosswalk, site and crash assignment logic.
+- Rebuilding the crosswalks and sites from the raw NYC Walks and centerline files gives 110,603 crosswalk segments and 41,937 sites, the same as the original run. It takes about 25 seconds and 400 MB of memory.
+- `verify` on the saved site table passes all six checks, including 1.16 for harm crashes and 1.29 for deaths.
+- `models`, `robustness` and `scale` reproduce the numbers in the research log.
+- `fetch` downloads the sources, and the checksums of the NYC Walks files match the originals.
+- The `sites` command ran end to end on synthetic crashes placed on the real sites.
+
+Not yet run. The export script `scripts/00_export_processed_inputs.py`, `sites` on the real crash export, and the Colab runner notebook have not been run. Until the export exists, `verify`, `models`, `robustness` and `scale` work from the site table that the earlier Colab cells saved.
+
+## Package layout
+
+```
+src/nycped/      The package. config, io, exposure, crashes, sitedata, models, robustness, scale, cli
+tests/           Unit tests, plus integration tests that run only when NYCPED_DATA_DIR holds the data
+scripts/         00_export_processed_inputs.py, and colab_cells/ with the original notebook cells
+notebooks/       The TDSP Navigator notebook with its additional work section, and run_on_colab.ipynb
+docs/            Research log and changelog
+data/            Data notes only. No third-party data are stored here.
+```
+
+`scripts/colab_cells/` holds the original numbered Colab cells that produced the first results. They are kept for the record. The package supersedes them.
+
+## Running on Google Colab
+
+Open `notebooks/run_on_colab.ipynb`. It mounts Drive, installs the package, and runs the commands above. While the repository is private, add a GitHub access token as a Colab secret named `GITHUB_TOKEN`. Do not paste credentials into notebook cells.
 
 ## Data
 
@@ -62,13 +102,13 @@ No third-party data are stored in this repository. See `data/README.md` for sour
 
 ## Reproducibility notes
 
-- Random seeds are set in the scripts that simulate. The measurement error test uses 2026, the cluster bootstrap 7 and the random zonings 11.
-- Package versions are not pinned. After a clean end to end run, create a lock file.
-- The notebook in `notebooks/` keeps the outputs from the runs that produced the numbers above, except the output of script 06, which came from a separate Python session on the saved site table. Rerun that cell to refresh it.
+- Random seeds are fixed. The measurement error test uses 2026, the cluster bootstrap 7 and the random zonings 11.
+- Continuous integration runs the unit tests on every push, on Python 3.11 and 3.12.
+- Library versions are unpinned in `pyproject.toml`. `requirements-lock.txt` records the versions used for the verified run.
 
 ## AI assistance
 
-Parts of this work were developed with AI assistance (Claude, Anthropic) for literature search, planning the analyses and drafting code. The author directed the work, ran every script and takes responsibility for the results and their interpretation.
+Parts of this work were developed with AI assistance (Claude, Anthropic) for literature search, planning the analyses and drafting code. The author directed the work, ran the analyses and takes responsibility for the results and their interpretation.
 
 ## License and citation
 

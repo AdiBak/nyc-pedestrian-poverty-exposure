@@ -6,12 +6,15 @@ data/*
 *.zip
 *.parquet
 
-# Secrets and local files
+# Local files
 .env
-*.key
 
-# Python and notebook clutter
+# Python, packaging and notebook clutter
 __pycache__/
 *.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
 .ipynb_checkpoints/
 .DS_Store

@@ -1,0 +1,33 @@
+{
+  "description": "Values from the 27 October 2026 runs. The verify command compares a fresh run with these.",
+  "checks": {
+    "n_sites": {
+      "value": 38477,
+      "tol": 0
+    },
+    "harm_poverty_rr_primary": {
+      "value": 1.16,
+      "tol": 0.01
+    },
+    "deaths_poverty_rr_primary": {
+      "value": 1.29,
+      "tol": 0.02
+    },
+    "volume_elasticity_primary": {
+      "value": 0.79,
+      "tol": 0.02
+    },
+    "severity_rr": {
+      "value": 1.11,
+      "tol": 0.02
+    },
+    "frequency_rr": {
+      "value": 1.16,
+      "tol": 0.01
+    }
+  },
+  "integration": {
+    "crosswalk_segments": 110603,
+    "sites_25m": 41937
+  }
+}

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nycped"
+version = "0.2.0"
+description = "Pedestrian harm, neighborhood poverty and pedestrian exposure in New York City"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Aditya Bakshi"}]
+dependencies = [
+    "numpy",
+    "pandas",
+    "geopandas>=0.14",
+    "pyogrio",
+    "shapely>=2",
+    "scikit-learn",
+    "scipy",
+    "statsmodels",
+    "patsy",
+    "requests",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nycped = ["expected_results.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: needs the downloaded data, set NYCPED_DATA_DIR"]
