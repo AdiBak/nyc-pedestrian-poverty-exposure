@@ -137,7 +137,7 @@ def cmd_checks(args, s: Settings):
     print('\n2. Truck routes as a partial stand-in for heavy vehicle traffic')
     if 'any_truck' in d.columns:
         print(f"  Sites on a truck route: {d['any_truck'].mean():.1%}")
-        print(dg.truck_route_check(d).drop(columns='rr').to_string(index=False))
+        print(dg.truck_route_check(d).drop(columns=['rr', 'lo', 'hi']).to_string(index=False))
     else:
         print('  The site table has no any_truck column. Rebuild it with the sites command.')
     print('\n3. Sampling error in the ACS tract poverty rate')

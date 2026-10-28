@@ -1,0 +1,415 @@
+{
+ "coefficients": {
+  "width10": [
+   1.2591829918215391,
+   1.208784523543093,
+   1.3116827490851957
+  ],
+  "lanes": [
+   1.0939371096268742,
+   1.0436486115347081,
+   1.1466487729610721
+  ],
+  "speed5": [
+   1.2364906382703513,
+   1.0831463410599815,
+   1.411544350539014
+  ],
+  "n_cross_z": [
+   0.859692904869969,
+   0.8261470092096388,
+   0.8946009395964809
+  ],
+  "Walk_Share_z": [
+   1.1065744845234513,
+   1.0643270009043981,
+   1.150498943236273
+  ],
+  "Transit_Share_z": [
+   1.3984439021244652,
+   1.3392847457173929,
+   1.4602162487421986
+  ],
+  "Commercial_Share_z": [
+   0.9341147156195021,
+   0.9052412037123679,
+   0.9639091750999819
+  ],
+  "volume_elasticity": 0.7914590009437164,
+  "sites": 38477,
+  "harm_crashes": 30866,
+  "deaths": 411
+ },
+ "main": {
+  "A volume only": {
+   "harm_poisson": [
+    1.3042646409447962,
+    1.2581712382588648,
+    1.3520466864057028
+   ],
+   "harm_negbin": [
+    1.35581070813069,
+    1.299956966694156,
+    1.4140642524163851
+   ],
+   "deaths_poisson": [
+    1.2813333797397353,
+    1.177637685748952,
+    1.3941598930668508
+   ]
+  },
+  "B + street design": {
+   "harm_poisson": [
+    1.2763763145193603,
+    1.233182307171948,
+    1.3210832549180154
+   ],
+   "harm_negbin": [
+    1.3285771532552173,
+    1.271615106867887,
+    1.3880908166460795
+   ],
+   "deaths_poisson": [
+    1.2576881341146355,
+    1.157527839651643,
+    1.3665152478481974
+   ]
+  },
+  "C + tract controls": {
+   "harm_poisson": [
+    1.1467669755461982,
+    1.1116700414872371,
+    1.1829719675129637
+   ],
+   "harm_negbin": [
+    1.1512297573606647,
+    1.1110008305662247,
+    1.1929153586296033
+   ],
+   "deaths_poisson": [
+    1.2287308167350075,
+    1.1135891011447017,
+    1.3557778344295195
+   ]
+  },
+  "D + borough (primary)": {
+   "harm_poisson": [
+    1.1612057167790717,
+    1.1222546718388455,
+    1.201508668679462
+   ],
+   "harm_negbin": [
+    1.1660697070087493,
+    1.1239492044525767,
+    1.209768694365264
+   ],
+   "deaths_poisson": [
+    1.2880234729523403,
+    1.1699789808190943,
+    1.41797800992523
+   ]
+  }
+ },
+ "frequency_severity": {
+  "frequency": [
+   1.1612057167790717,
+   1.1222546718388455,
+   1.201508668679462
+  ],
+  "severity": [
+   1.1100783534950793,
+   1.0012887987368155,
+   1.2306878419622111
+  ],
+  "total": [
+   1.2880234729523403,
+   1.1699789808190943,
+   1.41797800992523
+  ],
+  "sites_with_crash": 13205
+ },
+ "scale": {
+  "real": [
+   {
+    "outcome": "harm",
+    "model": "residents only",
+    "scale": "tracts",
+    "zones": 2183,
+    "rr": 1.0615069828297472,
+    "lo": 1.023058498476841,
+    "hi": 1.1014004343582708
+   },
+   {
+    "outcome": "harm",
+    "model": "residents only",
+    "scale": "ZIP areas",
+    "zones": 183,
+    "rr": 1.0857351261673294,
+    "lo": 1.0122205457758224,
+    "hi": 1.164588852807836
+   },
+   {
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "scale": "tracts",
+    "zones": 2183,
+    "rr": 1.1313935713789802,
+    "lo": 1.0998181590274114,
+    "hi": 1.1638755032828842
+   },
+   {
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "scale": "ZIP areas",
+    "zones": 183,
+    "rr": 1.202016442618429,
+    "lo": 1.117599008506055,
+    "hi": 1.292810316874252
+   },
+   {
+    "outcome": "killed",
+    "model": "residents only",
+    "scale": "tracts",
+    "zones": 2183,
+    "rr": 1.161346426136905,
+    "lo": 1.0496832583430846,
+    "hi": 1.2848880943665928
+   },
+   {
+    "outcome": "killed",
+    "model": "residents only",
+    "scale": "ZIP areas",
+    "zones": 183,
+    "rr": 1.166659508129793,
+    "lo": 0.9979759548678644,
+    "hi": 1.3638549118048284
+   },
+   {
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "scale": "tracts",
+    "zones": 2183,
+    "rr": 1.2317436558077954,
+    "lo": 1.1154024170605994,
+    "hi": 1.3602197829380571
+   },
+   {
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "scale": "ZIP areas",
+    "zones": 183,
+    "rr": 1.252197831013826,
+    "lo": 1.045575025121276,
+    "hi": 1.49965269858455
+   }
+  ],
+  "random": [
+   {
+    "target_tracts": 2,
+    "zones": 1194,
+    "outcome": "harm",
+    "model": "residents only",
+    "median": 1.0651948274565672,
+    "lo95": 1.0485593279351653,
+    "hi95": 1.080219107214137
+   },
+   {
+    "target_tracts": 2,
+    "zones": 1194,
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "median": 1.1495585983359486,
+    "lo95": 1.134170627896363,
+    "hi95": 1.1638858577064684
+   },
+   {
+    "target_tracts": 2,
+    "zones": 1194,
+    "outcome": "killed",
+    "model": "residents only",
+    "median": 1.152316128976147,
+    "lo95": 1.0972211096074331,
+    "hi95": 1.2124069672412126
+   },
+   {
+    "target_tracts": 2,
+    "zones": 1194,
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "median": 1.237207048023476,
+    "lo95": 1.1602095755401882,
+    "hi95": 1.3079573597214658
+   },
+   {
+    "target_tracts": 4,
+    "zones": 681,
+    "outcome": "harm",
+    "model": "residents only",
+    "median": 1.0634196714671051,
+    "lo95": 1.0438399345100526,
+    "hi95": 1.0845825355193754
+   },
+   {
+    "target_tracts": 4,
+    "zones": 681,
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "median": 1.1597161341447897,
+    "lo95": 1.140298702478025,
+    "hi95": 1.1842707319348023
+   },
+   {
+    "target_tracts": 4,
+    "zones": 681,
+    "outcome": "killed",
+    "model": "residents only",
+    "median": 1.1214339251842498,
+    "lo95": 1.0433042695825752,
+    "hi95": 1.2041181064963957
+   },
+   {
+    "target_tracts": 4,
+    "zones": 681,
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "median": 1.2029325909970263,
+    "lo95": 1.1175906262360904,
+    "hi95": 1.290364468068049
+   },
+   {
+    "target_tracts": 8,
+    "zones": 404,
+    "outcome": "harm",
+    "model": "residents only",
+    "median": 1.07100294254866,
+    "lo95": 1.0404815313164926,
+    "hi95": 1.0946446610440326
+   },
+   {
+    "target_tracts": 8,
+    "zones": 404,
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "median": 1.1748567641721688,
+    "lo95": 1.1419597507544557,
+    "hi95": 1.19521202433907
+   },
+   {
+    "target_tracts": 8,
+    "zones": 404,
+    "outcome": "killed",
+    "model": "residents only",
+    "median": 1.1281399706722741,
+    "lo95": 1.0275017919195621,
+    "hi95": 1.224417417081631
+   },
+   {
+    "target_tracts": 8,
+    "zones": 404,
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "median": 1.1964414699702903,
+    "lo95": 1.0877054150212224,
+    "hi95": 1.3236555319371472
+   },
+   {
+    "target_tracts": 16,
+    "zones": 250,
+    "outcome": "harm",
+    "model": "residents only",
+    "median": 1.0720780808589891,
+    "lo95": 1.0368691417543696,
+    "hi95": 1.1069068316338009
+   },
+   {
+    "target_tracts": 16,
+    "zones": 250,
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "median": 1.1803260708644356,
+    "lo95": 1.1419472657292138,
+    "hi95": 1.2201141570713048
+   },
+   {
+    "target_tracts": 16,
+    "zones": 250,
+    "outcome": "killed",
+    "model": "residents only",
+    "median": 1.1094363626124704,
+    "lo95": 1.0168994108421114,
+    "hi95": 1.2320896154603647
+   },
+   {
+    "target_tracts": 16,
+    "zones": 250,
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "median": 1.192582439274755,
+    "lo95": 1.0701441114168007,
+    "hi95": 1.3496626175946307
+   },
+   {
+    "target_tracts": 32,
+    "zones": 157,
+    "outcome": "harm",
+    "model": "residents only",
+    "median": 1.0728337197457916,
+    "lo95": 1.027747099373376,
+    "hi95": 1.1140219338131496
+   },
+   {
+    "target_tracts": 32,
+    "zones": 157,
+    "outcome": "harm",
+    "model": "residents + volume + design",
+    "median": 1.1802666314923242,
+    "lo95": 1.136059292063309,
+    "hi95": 1.2332418408026944
+   },
+   {
+    "target_tracts": 32,
+    "zones": 157,
+    "outcome": "killed",
+    "model": "residents only",
+    "median": 1.0724896462868747,
+    "lo95": 0.9805755070338301,
+    "hi95": 1.2026561490628058
+   },
+   {
+    "target_tracts": 32,
+    "zones": 157,
+    "outcome": "killed",
+    "model": "residents + volume + design",
+    "median": 1.1539714621328634,
+    "lo95": 1.0211639013314482,
+    "hi95": 1.336570070649358
+   }
+  ]
+ },
+ "autocorrelation": {
+  "sites": {
+   "I": 0.087721813476045,
+   "expected": -2.5990227674394427e-05,
+   "perm_mean": -4.428624240847535e-05,
+   "perm_sd": 0.0023333740942410018,
+   "p_value": 0.005
+  },
+  "tracts": {
+   "I": 0.19751532288056378,
+   "expected": -0.00045829514207149406,
+   "perm_mean": -0.0003069019073270121,
+   "perm_sd": 0.009246950843684754,
+   "p_value": 0.005
+  }
+ },
+ "acs_error": {
+  "reliability": 0.785931052099536,
+  "conditional_reliability": 0.6893567529434554,
+  "tracts": 2183,
+  "tracts_missing_moe": 0,
+  "mean_se_points": 4.77589330095641,
+  "naive_rr": 1.161205716779126,
+  "simex_quadratic_rr": 1.2232246467412764,
+  "simex_linear_rr": 1.1876041628008391
+ }
+}

@@ -110,18 +110,19 @@ def truck_route_check(d: pd.DataFrame, y: str = 'harm') -> pd.DataFrame:
     rows = []
     res = fit_poisson(d, y, base)
     rows.append({'model': 'primary (model D)', 'sites': len(d), 'poverty_rr': fmt_rr(rr_per10(res)),
-                 'rr': rr_per10(res)[0], 'truck_route_rr': ''})
+                 'rr': rr_per10(res)[0], 'lo': rr_per10(res)[1], 'hi': rr_per10(res)[2], 'truck_route_rr': ''})
     res = fit_poisson(d, y, base + ' + any_truck')
     truck = float(np.exp(res.params['any_truck']))
     rows.append({'model': 'plus truck route flag', 'sites': len(d), 'poverty_rr': fmt_rr(rr_per10(res)),
-                 'rr': rr_per10(res)[0], 'truck_route_rr': f'{truck:.2f}'})
+                 'rr': rr_per10(res)[0], 'lo': rr_per10(res)[1], 'hi': rr_per10(res)[2],
+                 'truck_route_rr': f'{truck:.2f}'})
     del res
     gc.collect()
     for label, mask in [('sites on no truck route', d['any_truck'] == 0), ('sites on a truck route', d['any_truck'] == 1)]:
         sub = d[mask]
         res = fit_poisson(sub, y, base)
         rows.append({'model': label, 'sites': len(sub), 'poverty_rr': fmt_rr(rr_per10(res)),
-                     'rr': rr_per10(res)[0], 'truck_route_rr': ''})
+                     'rr': rr_per10(res)[0], 'lo': rr_per10(res)[1], 'hi': rr_per10(res)[2], 'truck_route_rr': ''})
         del res
         gc.collect()
     return pd.DataFrame(rows)

@@ -109,7 +109,7 @@ def robustness_rows(d: pd.DataFrame, years, definitions: dict | None, boot: int,
                             ('sites on no truck route', 'Sites off truck routes'),
                             ('sites on a truck route', 'Sites on truck routes')]:
             n = tr[tr.model == label].iloc[0]
-            add('Confounding', name, tuple(float(x) for x in n.poverty_rr.replace(' to ', ' ').replace('(', '').replace(')', '').split()))
+            add('Confounding', name, (n.rr, n.lo, n.hi))
     for label, t in (definitions or {}).items():
         add('Definitions', label, (t,))
     if 'y_early' in d:
