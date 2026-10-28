@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1, 28 October 2026
+
+- Added `docs/REPRODUCE.md`, a five step guide with expected output from the confirmed end to end run.
+- Added `docs/DATA_RELEASE.md`, which describes the two processed inputs, their checksums and the plan for a data deposit.
+- Added `.zenodo.json` for the code release.
+- `fetch` now labels files that were already present as recorded, with their modification time, and not as retrieved on the date it first saw them.
+
 ## 0.2.0, 28 October 2026
 
 - The analysis is now a Python package, `nycped`, with a command line, unit tests and continuous integration. The original Colab cells moved to `scripts/colab_cells/`.

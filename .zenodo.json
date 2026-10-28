@@ -1,0 +1,20 @@
+{
+  "title": "NYC pedestrian harm, neighborhood poverty and pedestrian exposure (code)",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Bakshi, Aditya"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "description": "<p>Python package and scripts for an analysis of how pedestrian harm in New York City relates to neighborhood poverty once pedestrian exposure and street design are accounted for. Includes unit tests, a command line and instructions to reproduce the published numbers.</p>",
+  "keywords": [
+    "pedestrian safety",
+    "New York City",
+    "traffic crashes",
+    "poverty",
+    "exposure",
+    "Poisson regression"
+  ]
+}

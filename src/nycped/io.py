@@ -59,8 +59,13 @@ class Manifest:
         self.path = Path(path)
         self.entries = json.loads(self.path.read_text()) if self.path.exists() else {}
 
-    def record(self, name: str, url: str, info: dict) -> None:
-        self.entries[name] = {'url': url, 'retrieved_utc': datetime.now(timezone.utc).isoformat(timespec='seconds'), **info}
+    def record(self, name: str, url: str, info: dict, retrieved: bool = True) -> None:
+        """Add an entry. Files downloaded now get retrieved_utc. Files that were already present get
+        recorded_utc and their modification time, because their true retrieval date is unknown."""
+        now = datetime.now(timezone.utc).isoformat(timespec='seconds')
+        entry = {'url': url, **info}
+        entry['retrieved_utc' if retrieved else 'recorded_utc'] = now
+        self.entries[name] = entry
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.path.write_text(json.dumps(self.entries, indent=2, sort_keys=True))
 
@@ -72,7 +77,9 @@ def fetch_all(settings: Settings, force: bool = False) -> Manifest:
         dest = settings.path(name)
         if dest.exists() and not force:
             if name not in manifest.entries:
-                manifest.record(name, url, {'bytes': dest.stat().st_size, 'sha256': sha256_file(dest)})
+                mtime = datetime.fromtimestamp(dest.stat().st_mtime, timezone.utc).isoformat(timespec='seconds')
+                manifest.record(name, url, {'bytes': dest.stat().st_size, 'sha256': sha256_file(dest),
+                                            'file_modified_utc': mtime}, retrieved=False)
             continue
         manifest.record(name, url, download(url, dest))
     return manifest

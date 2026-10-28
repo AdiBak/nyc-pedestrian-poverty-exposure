@@ -35,6 +35,8 @@ python -m nycped fetch                   # downloads the public sources and writ
 
 ## Reproducing the results
 
+For a step by step guide with the expected output, see `docs/REPRODUCE.md`. For the processed inputs and the planned data deposit, see `docs/DATA_RELEASE.md`.
+
 There are two routes.
 
 **Check the numbers from a saved site table.** This needs the site table and no raw data. It reruns the primary models and compares them with the stored expected values.
@@ -77,7 +79,10 @@ Run in Python 3.13 with the versions in `requirements-lock.txt`.
 - `fetch` downloads the sources, and the checksums of the NYC Walks files match the originals.
 - The `sites` command ran end to end on synthetic crashes placed on the real sites.
 
-Not yet run. The export script `scripts/00_export_processed_inputs.py`, `sites` on the real crash export, and the Colab runner notebook have not been run. Until the export exists, `verify`, `models`, `robustness` and `scale` work from the site table that the earlier Colab cells saved.
+- The export script ran in the Milestone 5 session and printed the expected counts, 2,189 tracts, 37,815 crashes and 469 deaths.
+- The full rebuild, `fetch`, `sites` and `verify`, ran in Google Colab from the raw sources and the two processed inputs. It gave 110,603 crosswalk segments, 41,937 sites and 38,477 sites in the model, and all six checks passed.
+
+Not yet run. The Colab runner notebook and the continuous integration workflow have not been run.
 
 ## Package layout
 
