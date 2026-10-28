@@ -35,7 +35,19 @@ Truck route sites carry 1.48 times the harm of other sites after the other contr
 
 ## 3. Sampling error in the ACS tract poverty rate
 
-Pending. Run scripts/01_export_tract_poverty_moe.py in Colab, then run the checks command with the option --poverty-moe pointing at tract_poverty_moe.csv. The check adds noise at the tract level in proportion to the ACS margin of error, refits, and extrapolates back to zero error.
+The ACS gives a margin of error for each tract poverty rate. The check treats the margin divided by 1.645 as a known standard error, adds extra noise at the tract level, refits, and extrapolates the coefficient back to zero error (simulation extrapolation). The margins come from the Census API through scripts/01_export_tract_poverty_moe.py. All 2,189 analysis tracts have one.
+
+| Quantity | Value |
+|---|---|
+| Mean standard error of the tract poverty rate | 4.78 points |
+| Reliability of the poverty rate (share of variance that is signal) | 0.786 |
+| Reliability among tracts alike on the other controls | 0.689 |
+| Harm crashes, naive poverty ratio | 1.161 |
+| Corrected, linear and quadratic extrapolation | 1.190 and 1.220 |
+| Deaths, naive poverty ratio | 1.288 |
+| Corrected, linear and quadratic extrapolation | 1.338 and 1.407 |
+
+Reading. Sampling error in the poverty rate pulls the estimate toward 1, so the primary ratio of 1.16 is conservative. Corrected values for harm crashes run from 1.19 to 1.22. Among comparable tracts, about 31 percent of the variation in poverty is sampling noise, which is why the correction is larger than the unconditional reliability alone suggests. Results were the same across two seeds. The method assumes the errors are independent and classical. The walking and transit shares are also ACS estimates with sampling error, so the controls are imperfect, and some confounding they would absorb may remain.
 
 ## Reproducibility note
 

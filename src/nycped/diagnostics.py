@@ -141,6 +141,12 @@ def poverty_error_simex(d: pd.DataFrame, moe: pd.DataFrame, z: float = 1.645, la
     se_t = (se['poverty_moe'].fillna(se['poverty_moe'].median()) / z).values
     pov_t = d.groupby('GEOID')[POVERTY].first().reindex(tracts).values
     reliability = float(1 - np.mean(se_t ** 2) / np.var(pov_t, ddof=1))
+    tr = d.groupby('GEOID').first().reindex(tracts)
+    Z = np.column_stack([np.ones(len(tr)), tr['Walk_Share'], tr['Transit_Share'], tr['Commercial_Share'],
+                         pd.get_dummies(tr['county'], drop_first=True).values.astype(float)])
+    coef = np.linalg.lstsq(Z, pov_t, rcond=None)[0]
+    # Reliability among tracts that look alike on the other controls, which is what the model compares
+    cond_rel = float(1 - np.mean(se_t ** 2) / np.var(pov_t - Z @ coef, ddof=Z.shape[1]))
     yv, Xv, names = design_matrix(d, y, rhs_for(PRIMARY))
     i_pov = names.index(POVERTY)
     b0 = irls_poisson(Xv, yv, iters=80)
@@ -156,7 +162,8 @@ def poverty_error_simex(d: pd.DataFrame, moe: pd.DataFrame, z: float = 1.645, la
         pts[lam] = float(np.mean(acc))
     L = np.array(sorted(pts))
     v = np.array([pts[k] for k in L])
-    return {'reliability': reliability, 'tracts': len(tracts), 'tracts_missing_moe': n_missing,
+    return {'reliability': reliability, 'conditional_reliability': cond_rel, 'tracts': len(tracts),
+            'tracts_missing_moe': n_missing,
             'mean_se_points': float(se_t.mean()), 'naive_rr': float(np.exp(10 * b0[i_pov])),
             'simex_quadratic_rr': float(np.exp(10 * np.polyval(np.polyfit(L, v, 2), -1.0))),
             'simex_linear_rr': float(np.exp(10 * np.polyval(np.polyfit(L, v, 1), -1.0)))}

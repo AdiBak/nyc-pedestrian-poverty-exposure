@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1, 28 October 2026
+
+- The sampling error check now reports the reliability of the poverty rate among tracts alike on the other controls, 0.689, next to the unconditional 0.786.
+- Recorded the sampling error results in docs/CHECKS_LOG.md. Corrected poverty ratios for harm crashes run from 1.19 to 1.22 against the naive 1.16.
+
 ## 0.3.0, 28 October 2026
 
 - New command checks, with the checks a reviewer is likely to ask for. Moran I of the residuals, standard errors clustered at several spatial scales, a spatial block bootstrap, ZIP area fixed effects, a truck route proxy for heavy vehicle traffic, and sensitivity to sampling error in the ACS poverty rate. Results are in docs/CHECKS_LOG.md.

@@ -99,3 +99,10 @@ def test_lean_fixed_effects_matches_statsmodels():
     lean = m.poisson_fixed_effects(d[cols].values, d['harm'].values.astype(float), groups, small_sample=False)
     assert abs(lean['beta'][0] - dense.params['Poverty_Rate_Percent']) < 1e-6
     assert abs(lean['se'][0] / dense.bse['Poverty_Rate_Percent'] - 1) < 0.02
+
+
+def test_poverty_error_simex_reports_conditional_reliability():
+    d, pov_true, se = simulate_sites(n_tracts=300, per=10, seed=8, pov_noise_se=5.0)
+    moe = pd.DataFrame({'GEOID': d.drop_duplicates('GEOID')['GEOID'], 'poverty_moe': 1.645 * se})
+    out = dg.poverty_error_simex(d, moe, n_rep=4)
+    assert 0 < out['conditional_reliability'] <= out['reliability'] + 0.05

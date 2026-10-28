@@ -109,6 +109,7 @@ def cmd_checks(args, s: Settings):
         moe = pd.read_csv(args.poverty_moe, dtype={'GEOID': str})
         r = dg.poverty_error_simex(d, moe, seed=s.seed)
         print(f"  Mean standard error {r['mean_se_points']:.2f} points, implied reliability {r['reliability']:.3f}, "
+              f"conditional on the other tract controls {r['conditional_reliability']:.3f}, "
               f"{r['tracts_missing_moe']} of {r['tracts']} tracts without a margin of error")
         print(f"  Poverty rate ratio, naive {r['naive_rr']:.3f}, corrected {r['simex_linear_rr']:.3f} (linear) "
               f"and {r['simex_quadratic_rr']:.3f} (quadratic)")
