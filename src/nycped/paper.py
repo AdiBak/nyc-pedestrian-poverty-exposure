@@ -127,7 +127,7 @@ def draw_robustness(rows: list[dict], path: Path) -> None:
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
 
-    fig, ax = plt.subplots(figsize=(6.4, 5.6))
+    fig, ax = plt.subplots(figsize=(3.4, 4.3))
     y, last, ticks, labels = len(rows), None, [], []
     for r in rows:
         y -= 1
@@ -144,8 +144,9 @@ def draw_robustness(rows: list[dict], path: Path) -> None:
     ax.axvline(rows[0]['rr'], color='0.6', ls=':', lw=1)
     ax.axvline(1.0, color='0.3', lw=0.8)
     ax.set_yticks(ticks)
-    ax.set_yticklabels(labels, fontsize=8)
-    ax.set_xlabel('Rate ratio per 10 point increase in tract poverty rate', fontsize=9)
+    ax.set_yticklabels(labels, fontsize=6.5)
+    ax.set_xlabel('Rate ratio per 10 points of poverty', fontsize=8)
+    ax.tick_params(axis='x', labelsize=7)
     for side in ('top', 'right'):
         ax.spines[side].set_visible(False)
     fig.tight_layout()
