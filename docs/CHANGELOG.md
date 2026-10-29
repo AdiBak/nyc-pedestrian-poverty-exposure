@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.2, 28 October 2026
+
+- The paper command also writes `gradient.pdf` (observed over expected harm by poverty decile, with ZIP area bootstrap intervals) and `ladder.pdf` (poverty ratio across models A to D).
+
 ## 0.4.1, 28 October 2026
 
 - Fixed the paper command failing on the pedestrians injured check. Sites with no assigned crash had a missing injured count, and the loader now treats it as zero. Added a test.

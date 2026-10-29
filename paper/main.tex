@@ -11,6 +11,8 @@
 
 % Revision marks: delete before submission.
 \newcommand{\todo}[1]{\textbf{[TODO: #1]}}
+% Shows a placeholder when a generated figure has not been built yet.
+\newcommand{\genfig}[1]{\IfFileExists{generated/#1.pdf}{\includegraphics[width=\columnwidth]{generated/#1.pdf}}{\fbox{\parbox{0.9\columnwidth}{Run \texttt{python -m nycped paper} to build #1.pdf.}}}}
 
 \title{Exposure-Adjusted Pedestrian Harm Is 16 Percent Higher per 10 Points of Neighborhood Poverty in New York City}
 \author{Aditya Bakshi\\\small Independent researcher}
@@ -94,7 +96,7 @@ We run the following, each with model D unless noted.
 The modeled volumes should track activity, so we compared them with independent tract measures. Median volume per crossing is highest in Manhattan (290) and lower in Brooklyn (162), the Bronx (159), Queens (127), and Staten Island (110). Across tracts the rank correlation of mean volume per crossing is 0.60 with population density and 0.51 with the ACS walking share, and 0.20 with poverty. The spread across boroughs looks narrow relative to density, so volumes may be overstated in low-activity areas. We return to this under measurement error.
 
 \subsection{Pedestrian harm and poverty at crossing sites}
-Table~\ref{tab:main} shows the poverty rate ratio as controls enter. With only crossing volume held fixed, harm crashes are 30 percent higher per 10 points of poverty (1.30, 1.26 to 1.35). Street design changes this little (1.28). Tract commuting and land use cut it to 1.15, and borough effects leave it at 1.16 (1.12 to 1.20). Together the controls absorb more than 40 percent of the log gap, almost all of it through the tract controls. Street design alone absorbs about 8 percent. The negative binomial cross-check gives the same ratios within 0.06.
+Table~\ref{tab:main} and Figure~\ref{fig:ladder} show the poverty rate ratio as controls enter. Figure~\ref{fig:gradient} shows the same pattern without a poverty term in the model, as observed over expected harm by poverty decile. With only crossing volume held fixed, harm crashes are 30 percent higher per 10 points of poverty (1.30, 1.26 to 1.35). Street design changes this little (1.28). Tract commuting and land use cut it to 1.15, and borough effects leave it at 1.16 (1.12 to 1.20). Together the controls absorb more than 40 percent of the log gap, almost all of it through the tract controls. Street design alone absorbs about 8 percent. The negative binomial cross-check gives the same ratios within 0.06.
 
 \begin{table*}[t]
 \centering
@@ -104,6 +106,20 @@ Table~\ref{tab:main} shows the poverty rate ratio as controls enter. With only c
 \input{generated/table_main.tex}
 \end{table*}
 
+\begin{figure}[t]
+\centering
+\genfig{ladder}
+\caption{Poverty rate ratio per 10 points as controls enter, for harm crashes and deaths. Bars are 95 percent intervals clustered by ZIP area.}
+\label{fig:ladder}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\genfig{gradient}
+\caption{Observed over expected pedestrian harm crashes by decile of tract poverty, scaled so the lowest decile is 1. Expected counts come from Poisson models that omit poverty. Bars are 95 percent intervals from resampling ZIP areas.}
+\label{fig:gradient}
+\end{figure}
+
 In model D, wider streets carry more harm: 26 percent more per additional 10 ft of street width (1.26, 1.21 to 1.31), 9 percent more per travel lane (1.09, 1.04 to 1.15), and 24 percent more per 5 mph of posted speed (1.24, 1.08 to 1.41). Posted speed barely varies in the city, so the speed estimate deserves caution. The volume elasticity is 0.79, meaning harm rises less than proportionally with pedestrian volume. Standardized tract transit share has a large coefficient (1.40 per SD, 1.34 to 1.46), walking share a moderate one (1.11), and commercial share a small negative one (0.93). The poverty gradient does not vary with volume (interaction $p=0.50$) and is slightly smaller on wider streets, by about 3 percent per 10 ft.
 
 \subsection{Robustness}
@@ -111,7 +127,7 @@ Figure~\ref{fig:robust} summarizes the checks. The ratio stays between 1.10 and 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{generated/robustness.pdf}
+\genfig{robustness}
 \caption{Poverty rate ratio per 10 points across robustness checks. Bars are 95 percent intervals where the check reports one. Open circles are point estimates. The dotted line marks the primary estimate of 1.16.}
 \label{fig:robust}
 \end{figure}

@@ -153,6 +153,86 @@ def draw_robustness(rows: list[dict], path: Path) -> None:
     plt.close(fig)
 
 
+def observed_over_expected(d: pd.DataFrame, terms: str, n_bins: int = 10, n_boot: int = 300, seed: int = 3) -> pd.DataFrame:
+    """Observed over expected harm crashes by poverty decile.
+
+    The expected count comes from a Poisson model that holds the given terms fixed and leaves poverty out.
+    A ratio above 1 means the decile has more harm than those terms predict. The ratio is scaled so the
+    lowest decile equals 1. Intervals come from resampling ZIP area clusters.
+    """
+    res = m.fit_poisson(d, 'harm', terms)
+    dd = pd.DataFrame({'cl': pd.factorize(d[m.CLUSTER])[0], 'bin': pd.qcut(d[m.POVERTY], n_bins, labels=False, duplicates='drop'),
+                       'y': d['harm'].values, 'mu': np.asarray(res.mu), 'pov': d[m.POVERTY].values})
+    n_cl, n_b = dd['cl'].max() + 1, dd['bin'].max() + 1
+    Y = np.zeros((n_cl, n_b))
+    M = np.zeros((n_cl, n_b))
+    np.add.at(Y, (dd['cl'].values, dd['bin'].values), dd['y'].values)
+    np.add.at(M, (dd['cl'].values, dd['bin'].values), dd['mu'].values)
+    oe = Y.sum(0) / M.sum(0)
+    rng = np.random.default_rng(seed)
+    boots = []
+    for _ in range(n_boot):
+        w = np.bincount(rng.integers(0, n_cl, n_cl), minlength=n_cl)
+        boots.append((w @ Y) / (w @ M))
+    boots = np.array(boots)
+    base = oe[0]
+    base_b = boots[:, 0:1]
+    out = pd.DataFrame({'decile': np.arange(1, n_b + 1), 'mean_poverty': dd.groupby('bin')['pov'].mean().values,
+                        'ratio': oe / base, 'lo': np.percentile(boots / base_b, 2.5, axis=0),
+                        'hi': np.percentile(boots / base_b, 97.5, axis=0)})
+    return out
+
+
+def draw_gradient(curves: dict, path: Path) -> None:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots(figsize=(3.4, 2.9))
+    marks = ['o', 's']
+    for i, (label, g) in enumerate(curves.items()):
+        off = (i - 0.5) * 0.12
+        ax.errorbar(g['mean_poverty'] + off, g['ratio'], yerr=[g['ratio'] - g['lo'], g['hi'] - g['ratio']],
+                    fmt=marks[i % 2] + '-', ms=3.5, lw=1, capsize=1.5, label=label)
+    ax.axhline(1.0, color='0.6', lw=0.8)
+    ax.set_xlabel('Tract poverty rate, mean within decile of sites (%)', fontsize=8)
+    ax.set_ylabel('Observed over expected harm,\nlowest decile = 1', fontsize=8)
+    ax.tick_params(labelsize=7)
+    ax.legend(fontsize=7, frameon=False)
+    for side in ('top', 'right'):
+        ax.spines[side].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+
+def draw_ladder(main: dict, path: Path) -> None:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+    specs = list(main)
+    fig, ax = plt.subplots(figsize=(3.4, 2.6))
+    for key, label, off, mk in [('harm_poisson', 'Harm crashes', 0.12, 'o'), ('deaths_poisson', 'Deaths', -0.12, 's')]:
+        if key not in main[specs[0]]:
+            continue
+        for i, sp in enumerate(specs):
+            rr, lo, hi = main[sp][key]
+            ax.plot([lo, hi], [-i + off] * 2, color='0.3', lw=1.3)
+            ax.plot(rr, -i + off, mk, color='0.1' if mk == 'o' else '0.5', ms=4, label=label if i == 0 else None)
+    ax.axvline(1.0, color='0.6', lw=0.8)
+    ax.set_yticks([-i for i in range(len(specs))])
+    ax.set_yticklabels([sp.split(' ', 1)[0] + '  ' + sp.split(' ', 1)[1] for sp in specs], fontsize=7)
+    ax.set_xlabel('Rate ratio per 10 points of poverty', fontsize=8)
+    ax.tick_params(axis='x', labelsize=7)
+    ax.legend(fontsize=7, frameon=False, loc='lower center', bbox_to_anchor=(0.5, 1.0), ncol=2)
+    for side in ('top', 'right'):
+        ax.spines[side].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
+
+
 def build_outputs(d: pd.DataFrame, out_dir, years, *, nbrs=None, tract_frame=None, poverty_moe=None, definitions=None,
                   draws: int = 100, boot: int = 300, perm: int = 199, seed: int = 2026) -> dict:
     out = Path(out_dir)
@@ -161,6 +241,11 @@ def build_outputs(d: pd.DataFrame, out_dir, years, *, nbrs=None, tract_frame=Non
     tex, nums = main_table(d)
     (out / 'table_main.tex').write_text(tex)
     numbers['main'] = nums
+    draw_ladder(nums, out / 'ladder.pdf')
+    curves = {'Street design and volume': observed_over_expected(d, m.DESIGN),
+              'Plus tract context and borough': observed_over_expected(d, m.DESIGN + m.CONTROLS + ' + C(county)')}
+    draw_gradient(curves, out / 'gradient.pdf')
+    numbers['gradient'] = {k: v.to_dict('records') for k, v in curves.items()}
     if 'killed' in d:
         fs = m.frequency_severity(d)
         numbers['frequency_severity'] = {k: v for k, v in fs.items()}
