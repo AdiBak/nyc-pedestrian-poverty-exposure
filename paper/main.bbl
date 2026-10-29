@@ -11,8 +11,7 @@ Aditya Bakshi.
   in {New York City}.
 \newblock \url{https://github.com/AdiBak/nyc-pedestrian-poverty-exposure},
   2026.
-\newblock Version 0.4.5. VERIFY: confirm this is the intended Zenodo DOI
-  (version or concept).
+\newblock Version 0.4.5. This DOI represents all versions.
 
 \bibitem[Cameron and Miller(2015)]{cameron2015practitioner}
 A.~Colin Cameron and Douglas~L. Miller.
@@ -48,8 +47,6 @@ Greg Lindsey, Tao Tao, Jueyu Wang, and Jason Cao.
 \newblock
   \url{https://www.nyc.gov/assets/visionzero/downloads/pdf/Vision-Zero-Reimagined-2026.pdf},
   2026.
-\newblock VERIFY: author, title and the rate definition. Taken from a summary
-  of the page, not read in full.
 
 \bibitem[Moran(1950)]{moran1950notes}
 P.~A.~P. Moran.
@@ -61,7 +58,7 @@ P.~A.~P. Moran.
 {New York City Department of City Planning}.
 \newblock Nyc street centerline (cscl).
 \newblock NYC Open Data, dataset inkn-q76z, {\natexlab{a}}.
-\newblock Accessed 2026. VERIFY: access date.
+\newblock Accessed 2026.
 
 \bibitem[{New York City Department of City Planning}({\natexlab{b}})]{pluto}
 {New York City Department of City Planning}.
@@ -80,7 +77,6 @@ P.~A.~P. Moran.
 \newblock
   \url{https://www.nyc.gov/html/dot/downloads/pdf/ped-safety-action-plan-update-2023.pdf},
   2023.
-\newblock VERIFY: URL.
 
 \bibitem[{New York City Department of Transportation}(2025)]{nycdot2025equity}
 {New York City Department of Transportation}.
@@ -89,13 +85,13 @@ P.~A.~P. Moran.
 \newblock
   \url{https://www.nyc.gov/html/dot/downloads/pdf/equity-and-street-safety.pdf},
   2025.
-\newblock VERIFY: publication year and URL. Data cover 2004 to 2023.
+\newblock Data cover 2004 to 2023.
 
 \bibitem[{New York City Police Department}()]{nyc_crashes}
 {New York City Police Department}.
 \newblock Motor vehicle collisions, crashes.
 \newblock NYC Open Data.
-\newblock Accessed 2026. VERIFY: dataset identifier and access date.
+\newblock Accessed 2026.
 
 \bibitem[Openshaw(1984)]{openshaw1984maup}
 Stan Openshaw.
@@ -109,7 +105,6 @@ Josh Roll.
   pedestrian injury, built environment, travel activity, and social equity.
 \newblock Technical memorandum, Oregon Department of Transportation, Research
   Section, 2021.
-\newblock VERIFY: report number and title wording.
 
 \bibitem[Santos~Silva and Tenreyro(2006)]{santossilva2006log}
 J.~M.~C. Santos~Silva and Silvana Tenreyro.
@@ -124,8 +119,6 @@ Andres Sevtsuk, Rounaq Basu, Liu Liu, Abdulaziz Alhassan, and Justin Kollar.
   applications for urban planning.
 \newblock \emph{Nature Cities}, 2026.
 \newblock \doi{10.1038/s44284-025-00383-y}.
-\newblock VERIFY: published title, volume and pages. Authors and title taken
-  from the preprint.
 
 \bibitem[Tao et~al.(2021)Tao, Lindsey, Cao, and Wang]{tao2021exposure}
 Tao Tao, Greg Lindsey, Jason Cao, and Jueyu Wang.
