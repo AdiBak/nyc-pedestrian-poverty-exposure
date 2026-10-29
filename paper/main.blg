@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: plainnat.bst
+Database file #1: references.bib
+Warning--empty year in nyc_centerline
+Warning--empty year in pluto
+Warning--empty year in nyc_crashes
+Warning--empty year in acs2023
+You've used 19 entries,
+            2773 wiz_defined-function locations,
+            707 strings with 8296 characters,
+and the built_in function-call counts, 7149 in all, are:
+= -- 654
+> -- 330
+< -- 18
++ -- 119
+- -- 99
+* -- 488
+:= -- 1120
+add.period$ -- 68
+call.type$ -- 19
+change.case$ -- 90
+chr.to.int$ -- 18
+cite$ -- 42
+duplicate$ -- 328
+empty$ -- 644
+format.name$ -- 126
+if$ -- 1496
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 9
+newline$ -- 113
+num.names$ -- 76
+pop$ -- 207
+preamble$ -- 1
+purify$ -- 71
+quote$ -- 0
+skip$ -- 246
+stack$ -- 0
+substring$ -- 200
+swap$ -- 22
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 204
+warning$ -- 4
+while$ -- 69
+width$ -- 0
+write$ -- 263
+(There were 4 warnings)

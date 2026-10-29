@@ -1,0 +1,142 @@
+\begin{thebibliography}{19}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bakshi(2026)]{nycped_code}
+Aditya Bakshi.
+\newblock nycped: pedestrian harm, neighborhood poverty and pedestrian exposure
+  in {New York City}.
+\newblock \url{https://github.com/AdiBak/nyc-pedestrian-poverty-exposure},
+  2026.
+\newblock Version 0.4.2. VERIFY: replace with the Zenodo DOI after release.
+
+\bibitem[Cameron and Miller(2015)]{cameron2015practitioner}
+A.~Colin Cameron and Douglas~L. Miller.
+\newblock A practitioner's guide to cluster-robust inference.
+\newblock \emph{Journal of Human Resources}, 50\penalty0 (2):\penalty0
+  317--372, 2015.
+
+\bibitem[Cook and Stefanski(1994)]{cook1994simex}
+J.~R. Cook and L.~A. Stefanski.
+\newblock Simulation-extrapolation estimation in parametric measurement error
+  models.
+\newblock \emph{Journal of the American Statistical Association}, 89\penalty0
+  (428):\penalty0 1314--1328, 1994.
+
+\bibitem[Fotheringham and Wong(1991)]{fotheringham1991mup}
+A.~Stewart Fotheringham and David W.~S. Wong.
+\newblock The modifiable areal unit problem in multivariate statistical
+  analysis.
+\newblock \emph{Environment and Planning A}, 23\penalty0 (7):\penalty0
+  1025--1044, 1991.
+
+\bibitem[Lindsey et~al.(2019)Lindsey, Tao, Wang, and Cao]{lindsey2019equity}
+Greg Lindsey, Tao Tao, Jueyu Wang, and Jason Cao.
+\newblock Pedestrian and bicycle crash risk and equity: Implications for street
+  improvement projects.
+\newblock Technical Report CTS 19-15, Roadway Safety Institute, University of
+  Minnesota, 2019.
+
+\bibitem[{Mayor's Office of Operations, City of New
+  York}(2026)]{vzreimagined2026}
+{Mayor's Office of Operations, City of New York}.
+\newblock Vision zero reimagined action plan.
+\newblock
+  \url{https://www.nyc.gov/assets/visionzero/downloads/pdf/Vision-Zero-Reimagined-2026.pdf},
+  2026.
+\newblock VERIFY: author, title and the rate definition. Taken from a summary
+  of the page, not read in full.
+
+\bibitem[Moran(1950)]{moran1950notes}
+P.~A.~P. Moran.
+\newblock Notes on continuous stochastic phenomena.
+\newblock \emph{Biometrika}, 37\penalty0 (1/2):\penalty0 17--23, 1950.
+
+\bibitem[{New York City Department of City
+  Planning}({\natexlab{a}})]{nyc_centerline}
+{New York City Department of City Planning}.
+\newblock Nyc street centerline (cscl).
+\newblock NYC Open Data, dataset inkn-q76z, {\natexlab{a}}.
+\newblock Accessed 2026. VERIFY: access date.
+
+\bibitem[{New York City Department of City Planning}({\natexlab{b}})]{pluto}
+{New York City Department of City Planning}.
+\newblock Primary land use tax lot output (pluto).
+\newblock NYC Open Data, {\natexlab{b}}.
+
+\bibitem[{New York City Department of Health and Mental
+  Hygiene}(2017)]{nychealth2017}
+{New York City Department of Health and Mental Hygiene}.
+\newblock Pedestrian fatalities in {New York City}.
+\newblock Epi Data Brief No.\ 86, March 2017.
+
+\bibitem[{New York City Department of Transportation}(2023)]{nycdot2023psap}
+{New York City Department of Transportation}.
+\newblock Borough pedestrian safety action plans: Update.
+\newblock
+  \url{https://www.nyc.gov/html/dot/downloads/pdf/ped-safety-action-plan-update-2023.pdf},
+  2023.
+\newblock VERIFY: URL.
+
+\bibitem[{New York City Department of Transportation}(2025)]{nycdot2025equity}
+{New York City Department of Transportation}.
+\newblock Equity and street safety: How communities of color and low income
+  communities have become safer.
+\newblock
+  \url{https://www.nyc.gov/html/dot/downloads/pdf/equity-and-street-safety.pdf},
+  2025.
+\newblock VERIFY: publication year and URL. Data cover 2004 to 2023.
+
+\bibitem[{New York City Police Department}()]{nyc_crashes}
+{New York City Police Department}.
+\newblock Motor vehicle collisions, crashes.
+\newblock NYC Open Data.
+\newblock Accessed 2026. VERIFY: dataset identifier and access date.
+
+\bibitem[Openshaw(1984)]{openshaw1984maup}
+Stan Openshaw.
+\newblock \emph{The Modifiable Areal Unit Problem}.
+\newblock Number~38 in Concepts and Techniques in Modern Geography. Geo Books,
+  Norwich, 1984.
+
+\bibitem[Roll(2021)]{roll2021oregon}
+Josh Roll.
+\newblock Pedestrian injury and social equity in {Oregon}: Analysis of
+  pedestrian injury, built environment, travel activity, and social equity.
+\newblock Technical memorandum, Oregon Department of Transportation, Research
+  Section, 2021.
+\newblock VERIFY: report number and title wording.
+
+\bibitem[Santos~Silva and Tenreyro(2006)]{santossilva2006log}
+J.~M.~C. Santos~Silva and Silvana Tenreyro.
+\newblock The log of gravity.
+\newblock \emph{Review of Economics and Statistics}, 88\penalty0 (4):\penalty0
+  641--658, 2006.
+
+\bibitem[Sevtsuk et~al.(2026)Sevtsuk, Basu, Liu, Alhassan, and
+  Kollar]{sevtsuk2026nycwalks}
+Andres Sevtsuk, Rounaq Basu, Liu Liu, Abdulaziz Alhassan, and Justin Kollar.
+\newblock Spatial distribution of foot-traffic in {New York City} and
+  applications for urban planning.
+\newblock \emph{Nature Cities}, 2026.
+\newblock \doi{10.1038/s44284-025-00383-y}.
+\newblock VERIFY: published title, volume and pages. Authors and title taken
+  from the preprint.
+
+\bibitem[Tao et~al.(2021)Tao, Lindsey, Cao, and Wang]{tao2021exposure}
+Tao Tao, Greg Lindsey, Jason Cao, and Jueyu Wang.
+\newblock The effects of pedestrian and bicycle exposure on crash risk in
+  {Minneapolis}.
+\newblock \emph{Journal of Transport and Land Use}, 14\penalty0 (1):\penalty0
+  1187--1208, 2021.
+\newblock \doi{10.5198/jtlu.2021.1980}.
+
+\bibitem[{U.S. Census Bureau}()]{acs2023}
+{U.S. Census Bureau}.
+\newblock American community survey 5-year estimates, 2019 to 2023.
+\newblock Tables S1701 and S0801.
+
+\end{thebibliography}

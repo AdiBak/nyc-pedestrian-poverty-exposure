@@ -27,7 +27,8 @@ Read the preprint, titled Spatial Distribution of Foot-traffic in New York City 
 - Vision Zero Reimagined Action Plan 2026: killed or severely injured rate per 1,000 population fell about 14 percent citywide since 2019 and about 17 percent in Priority Investment Areas, which are defined largely by share of non-White and low-income residents. Rates are per resident. Pedestrian-specific figures by income are not given.
 - Vision Zero Year 7 Report (2021): qualitative equity framing, no income breakdown of pedestrian harm.
 - Pedestrian Safety and Older New Yorkers (2022): age-group rates per 100,000, no income analysis.
-- Equity and Street Safety (NYC DOT, 2025) and the 2023 Borough Pedestrian Safety Action Plans Update could not be fetched. The first is the most relevant and should be read.
+- Equity and Street Safety (NYC DOT, read from PDF): NTAs grouped by poverty (ACS 2022: <10, 10-20, 20-30, 30+ percent). Pedestrian fatalities 2014-23 vs 2004-13 fell 25, 25, 24 and 34 percent from low to very high poverty. SIP miles per street mile 0.1, 0.2, 0.3, 0.3. Also quintiles of non-White share. Change over time only; no exposure adjustment, no level comparison. The poverty summary table has an internal typo (medium-poverty street miles 2,108.2 vs 3,108.2), so do not compute rates from it.
+- Borough Pedestrian Safety Action Plans Update 2023 (read): priority corridors, intersections and areas ranked by pedestrian KSI counts; no income analysis, no exposure denominator.
 
 ## Not yet read
 - Dangerous by Design (Smart Growth America), any edition. Not cited.
