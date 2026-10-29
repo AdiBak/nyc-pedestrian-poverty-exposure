@@ -115,7 +115,7 @@ No third-party data are stored in this repository. See `data/README.md` for sour
 
 ## AI assistance
 
-Parts of this work were developed with AI assistance (Claude, Anthropic) for literature search, planning the analyses and drafting code. The author directed the work, ran the analyses and takes responsibility for the results and their interpretation.
+Parts of this work were developed with AI assistance (Claude, Anthropic) for literature search, planning the analyses and drafting code. I directed the work, ran the analyses and take responsibility for the results and their interpretation.
 
 ## License and citation
 
