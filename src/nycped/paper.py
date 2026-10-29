@@ -207,11 +207,14 @@ def draw_map(d: pd.DataFrame, path: Path, tracts=None) -> bool:
     cb.set_label('Tract poverty rate (%)', fontsize=7)
     cb.ax.tick_params(labelsize=6)
     h = d[d['harm'] > 0].sort_values('harm')
-    axes[1].scatter(h['x'], h['y'], s=0.5 + 1.2 * h['harm'], c='#1f3a5f', alpha=0.45, linewidths=0)
+    axes[1].scatter(d['x'], d['y'], s=0.3, c='0.85', linewidths=0)
+    axes[1].scatter(h['x'], h['y'], s=0.2 + 0.6 * h['harm'], c='#1f3a5f', alpha=0.35, linewidths=0)
     axes[0].set_title('(a) Sites by tract poverty', fontsize=8)
     axes[1].set_title('(b) Sites with pedestrian harm crashes', fontsize=8)
     for ax in axes:
         ax.set_aspect('equal')
+        ax.set_xlabel('')
+        ax.set_ylabel('')
         ax.set_xticks([])
         ax.set_yticks([])
         for side in ax.spines.values():

@@ -2,7 +2,7 @@
 
 Research code for an analysis of how pedestrian harm in New York City relates to neighborhood poverty once pedestrian exposure and street design are accounted for. The analysis extends a Transportation Data Science Project (TDSP) Navigator notebook. A preprint is in preparation.
 
-**Status.** Version 0.4.3. The analysis is a Python package, `nycped`, with unit tests and a command line. See "What has been verified" below for what has and has not been run.
+**Status.** Version 0.4.4. The analysis is a Python package, `nycped`, with unit tests and a command line. See "What has been verified" below for what has and has not been run.
 
 ## Main findings
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.4, 28 October 2026
+
+- Map figure: removed the axis labels that tract plotting adds and shrank the crash markers, which had saturated panel (b).
+
 ## 0.4.3, 28 October 2026
 
 - The paper command also writes `map.png`, two panels of the study sites (by tract poverty, and sized by harm crashes), with tract outlines when `ny_tracts2020.zip` is present. Added a test.
