@@ -23,6 +23,12 @@ Read the preprint, titled Spatial Distribution of Foot-traffic in New York City 
 - Exposure improved fit and changed the top 1 percent high-risk locations. Pedestrian intersections: 42 percent of locations common to both model sets.
 - Mean predicted pedestrian and bicycle crash risk at intersections was higher in areas of concentrated poverty (ACP50) than elsewhere, by t-tests.
 
+## NYC Vision Zero library (second-hand summaries, check against the PDFs)
+- Vision Zero Reimagined Action Plan 2026: killed or severely injured rate per 1,000 population fell about 14 percent citywide since 2019 and about 17 percent in Priority Investment Areas, which are defined largely by share of non-White and low-income residents. Rates are per resident. Pedestrian-specific figures by income are not given.
+- Vision Zero Year 7 Report (2021): qualitative equity framing, no income breakdown of pedestrian harm.
+- Pedestrian Safety and Older New Yorkers (2022): age-group rates per 100,000, no income analysis.
+- Equity and Street Safety (NYC DOT, 2025) and the 2023 Borough Pedestrian Safety Action Plans Update could not be fetched. The first is the most relevant and should be read.
+
 ## Not yet read
 - Dangerous by Design (Smart Growth America), any edition. Not cited.
 - Modifiable areal unit problem. Openshaw (1984) is cited from memory and should be checked.
