@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.5, 28 October 2026
+
+- Declared matplotlib as a dependency. The paper command's figures need it, and the GitHub Actions run failed without it from the paper command commit onward.
+
 ## 0.4.4, 28 October 2026
 
 - Map figure: removed the axis labels that tract plotting adds and shrank the crash markers, which had saturated panel (b).

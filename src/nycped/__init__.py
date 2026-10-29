@@ -1,3 +1,3 @@
 """Pedestrian harm, neighborhood poverty and pedestrian exposure in New York City."""
 
-__version__ = "0.4.4"
+__version__ = "0.4.5"
