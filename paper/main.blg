@@ -9,7 +9,7 @@ Warning--empty year in nyc_crashes
 Warning--empty year in acs2023
 You've used 19 entries,
             2773 wiz_defined-function locations,
-            707 strings with 8296 characters,
+            708 strings with 8338 characters,
 and the built_in function-call counts, 7149 in all, are:
 = -- 654
 > -- 330
