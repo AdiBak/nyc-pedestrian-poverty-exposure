@@ -32,3 +32,10 @@ def test_observed_over_expected_rises_with_poverty_when_poverty_matters():
     assert abs(g['ratio'].iloc[0] - 1.0) < 1e-9
     assert g['ratio'].iloc[-1] > 1.5
     assert (g['lo'] <= g['ratio']).all() and (g['hi'] >= g['ratio']).all()
+
+
+def test_map_is_drawn_only_with_coordinates(tmp_path):
+    d, _, _ = simulate_sites(n_tracts=40, per=8, seed=2)
+    assert not paper.draw_map(d.drop(columns=['x', 'y']), tmp_path / 'a.png')
+    assert paper.draw_map(d, tmp_path / 'map.png')
+    assert (tmp_path / 'map.png').stat().st_size > 1000

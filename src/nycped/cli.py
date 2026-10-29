@@ -60,9 +60,11 @@ def cmd_paper(args, s: Settings):
     d = _load_sites(args.sites)
     t = sc.tract_frame(d)
     nbrs = None
+    tracts = None
     tract_zip = s.path('ny_tracts2020.zip')
-    if tract_zip.exists() and not args.skip_scale:
+    if tract_zip.exists():
         tracts = ex.read_nyc_tracts(tract_zip)
+    if tracts is not None and not args.skip_scale:
         nbrs = sc.adjacency(tracts, list(t['GEOID']), dict(zip(t['GEOID'], t['county'])))
     else:
         print('Skipping the scale table. It needs ny_tracts2020.zip, which fetch downloads.')
@@ -79,7 +81,7 @@ def cmd_paper(args, s: Settings):
     else:
         print('Skipping the site definition checks. Pass --crashes and --tract-table to include them.')
     numbers = paper.build_outputs(d, args.out, s.years, nbrs=nbrs, tract_frame=t, poverty_moe=moe,
-                                  definitions=definitions, draws=args.draws, boot=args.boot, perm=args.perm, seed=s.seed)
+                                  definitions=definitions, tracts=tracts, draws=args.draws, boot=args.boot, perm=args.perm, seed=s.seed)
     print(f"wrote tables, figure and numbers.json to {args.out}")
     print(f"primary harm ratio {m.fmt_rr(numbers['main'][m.PRIMARY]['harm_poisson'])}")
 

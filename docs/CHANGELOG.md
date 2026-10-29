@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3, 28 October 2026
+
+- The paper command also writes `map.png`, two panels of the study sites (by tract poverty, and sized by harm crashes), with tract outlines when `ny_tracts2020.zip` is present. Added a test.
+
 ## 0.4.2, 28 October 2026
 
 - The paper command also writes `gradient.pdf` (observed over expected harm by poverty decile, with ZIP area bootstrap intervals) and `ladder.pdf` (poverty ratio across models A to D).

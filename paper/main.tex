@@ -59,9 +59,16 @@ Exposure comes from NYC Walks \citep{sevtsuk2026nycwalks}, which models peak-hou
 \subsection{Streets, tracts, and tract covariates}
 Street width, travel lanes, posted speed, road type, and truck route class come from the NYC street centerline file \citep{nyc_centerline}. Tract poverty, population, walking share of commuting, and transit share of commuting come from the 2019 to 2023 American Community Survey five-year estimates \citep{acs2023}. The commercial share of floor area comes from PLUTO \citep{pluto}. Tracts follow the 2020 cartographic boundaries. The tract table has 2,189 tracts, and 2,183 of them contain a site.
 
+\begin{figure*}[t]
+\centering
+\IfFileExists{generated/map.png}{\includegraphics[width=\textwidth]{generated/map.png}}{\fbox{\parbox{0.9\textwidth}{Run \texttt{python -m nycped paper} to build map.png.}}}
+\caption{Study sites. (a) Each of the 38,477 model sites, colored by the poverty rate of its tract. (b) Sites with at least one pedestrian harm crash from 2019 through 2023, sized by the number of crashes.}
+\label{fig:map}
+\end{figure*}
+
 \section{Methods}
 \subsection{Inferring crosswalks and sites}
-The NYC Walks file has no field that identifies crosswalks. We infer them as pedestrian segments that intersect the centerline of an ordinary street, meaning road type 1, active status, and not marked non-vehicular. This flags 110,603 segments, 35 percent of the network. Their median length is 16.6 m, against 64.6 m for all other segments, which is consistent with crosswalks being short crossings and sidewalks and paths being long. The 25 m rule treats crosswalk midpoints within 25 m of each other as one site, using DBSCAN with a minimum of one point. This gives 41,937 sites with a median of three crosswalks per site. Crash coordinates in the source file tend to sit at the intersection center, so a site, not a single crosswalk, is the appropriate unit.
+The NYC Walks file has no field that identifies crosswalks. We infer them as pedestrian segments that intersect the centerline of an ordinary street, meaning road type 1, active status, and not marked non-vehicular. This flags 110,603 segments, 35 percent of the network. Their median length is 16.6 m, against 64.6 m for all other segments, which is consistent with crosswalks being short crossings and sidewalks and paths being long. The 25 m rule treats crosswalk midpoints within 25 m of each other as one site, using DBSCAN with a minimum of one point. This gives 41,937 sites with a median of three crosswalks per site. Crash coordinates in the source file tend to sit at the intersection center, so a site, not a single crosswalk, is the appropriate unit. Figure~\ref{fig:map} maps the sites.
 
 Each site takes the sum of its crosswalk volumes, the widest street it crosses, the highest posted speed, and the most travel lanes. It takes the poverty rate and other covariates of the tract that contains it.
 

@@ -184,6 +184,44 @@ def observed_over_expected(d: pd.DataFrame, terms: str, n_bins: int = 10, n_boot
     return out
 
 
+def draw_map(d: pd.DataFrame, path: Path, tracts=None) -> bool:
+    """Two panels of the study sites. Left, sites by tract poverty. Right, sites sized by harm crashes.
+
+    Returns False without drawing when the site table has no coordinates.
+    """
+    if not {'x', 'y'} <= set(d.columns):
+        return False
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+
+    fig, axes = plt.subplots(1, 2, figsize=(7.0, 3.5), sharex=True, sharey=True)
+    if tracts is not None:
+        from .exposure import PROJECTED_CRS
+        tr = tracts.to_crs(PROJECTED_CRS)
+        for ax in axes:
+            tr.plot(ax=ax, facecolor='0.96', edgecolor='0.8', linewidth=0.15)
+    o = d.sort_values('Poverty_Rate_Percent')
+    sc_ = axes[0].scatter(o['x'], o['y'], c=o['Poverty_Rate_Percent'], s=0.6, cmap='YlOrRd', vmin=0, vmax=40, linewidths=0)
+    cb = fig.colorbar(sc_, ax=axes[0], fraction=0.04, pad=0.01)
+    cb.set_label('Tract poverty rate (%)', fontsize=7)
+    cb.ax.tick_params(labelsize=6)
+    h = d[d['harm'] > 0].sort_values('harm')
+    axes[1].scatter(h['x'], h['y'], s=0.5 + 1.2 * h['harm'], c='#1f3a5f', alpha=0.45, linewidths=0)
+    axes[0].set_title('(a) Sites by tract poverty', fontsize=8)
+    axes[1].set_title('(b) Sites with pedestrian harm crashes', fontsize=8)
+    for ax in axes:
+        ax.set_aspect('equal')
+        ax.set_xticks([])
+        ax.set_yticks([])
+        for side in ax.spines.values():
+            side.set_visible(False)
+    fig.tight_layout()
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
+    return True
+
+
 def draw_gradient(curves: dict, path: Path) -> None:
     import matplotlib
     matplotlib.use('Agg')
@@ -234,7 +272,7 @@ def draw_ladder(main: dict, path: Path) -> None:
     plt.close(fig)
 
 
-def build_outputs(d: pd.DataFrame, out_dir, years, *, nbrs=None, tract_frame=None, poverty_moe=None, definitions=None,
+def build_outputs(d: pd.DataFrame, out_dir, years, *, nbrs=None, tract_frame=None, poverty_moe=None, definitions=None, tracts=None,
                   draws: int = 100, boot: int = 300, perm: int = 199, seed: int = 2026) -> dict:
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
@@ -243,6 +281,7 @@ def build_outputs(d: pd.DataFrame, out_dir, years, *, nbrs=None, tract_frame=Non
     (out / 'table_main.tex').write_text(tex)
     numbers['main'] = nums
     draw_ladder(nums, out / 'ladder.pdf')
+    draw_map(d, out / 'map.png', tracts)
     curves = {'Street design and volume': observed_over_expected(d, m.DESIGN),
               'Plus tract context and borough': observed_over_expected(d, m.DESIGN + m.CONTROLS + ' + C(county)')}
     draw_gradient(curves, out / 'gradient.pdf')
