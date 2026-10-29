@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  28 OCT 2026 20:01
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  28 OCT 2026 22:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -165,6 +165,17 @@ LaTeX Info: Redefining \Relbar on input line 971.
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -314,24 +325,24 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 22.
+LaTeX Font Info:    ... okay on input line 22.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -397,65 +408,68 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 21.
+Package hyperref Info: Link coloring OFF on input line 22.
 
 (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-
-Underfull \hbox (badness 1838) in paragraph at lines 39--40
-[]\T1/cmr/m/n/10 It mea-sures ex-po-sure at 38,477 cross-ing sites
- []
+LaTeX Font Info:    Trying to load font information for U+msa on input line 24.
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 39--40
-\T1/cmr/m/n/10 adjusted pedes-trian harm is about 16 per-cent
- []
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 24.
 
-[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \vbox (badness 2119) has occurred while \output is active []
+
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
 
-]
-<generated/map.png, id=118, 505.89pt x 252.945pt>
+] [2]
+<generated/map.png, id=137, 505.89pt x 252.945pt>
 File: generated/map.png Graphic file (type png)
 <use generated/map.png>
-Package pdftex.def Info: generated/map.png  used on input line 64.
+Package pdftex.def Info: generated/map.png  used on input line 66.
 (pdftex.def)             Requested size: 505.89pt x 252.94823pt.
-
-Underfull \vbox (badness 3471) has occurred while \output is active []
-
- [2]
-[3 <./generated/map.png>]
-Underfull \hbox (badness 1454) in paragraph at lines 112--112
+ [3]
+Underfull \hbox (badness 1454) in paragraph at lines 114--114
 []\T1/cmr/bx/n/12 Pedestrian harm and poverty at
  []
 
 (./generated/table_main.tex)
-<generated/ladder.pdf, id=163, 245.718pt x 187.902pt>
+<generated/ladder.pdf, id=169, 245.718pt x 187.902pt>
 File: generated/ladder.pdf Graphic file (type pdf)
 <use generated/ladder.pdf>
-Package pdftex.def Info: generated/ladder.pdf  used on input line 125.
+Package pdftex.def Info: generated/ladder.pdf  used on input line 127.
 (pdftex.def)             Requested size: 242.10439pt x 185.14906pt.
-<generated/gradient.pdf, id=164, 245.718pt x 209.58301pt>
+<generated/gradient.pdf, id=170, 245.718pt x 209.58301pt>
 File: generated/gradient.pdf Graphic file (type pdf)
 <use generated/gradient.pdf>
-Package pdftex.def Info: generated/gradient.pdf  used on input line 132.
+Package pdftex.def Info: generated/gradient.pdf  used on input line 134.
 (pdftex.def)             Requested size: 242.10439pt x 206.51242pt.
- [4 <./generated/ladder.pdf>]
-<generated/robustness.pdf, id=219, 245.718pt x 310.761pt>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4 <./generated/map.png>]
+<generated/robustness.pdf, id=181, 245.718pt x 310.761pt>
 File: generated/robustness.pdf Graphic file (type pdf)
 <use generated/robustness.pdf>
-Package pdftex.def Info: generated/robustness.pdf  used on input line 144.
+Package pdftex.def Info: generated/robustness.pdf  used on input line 146.
 (pdftex.def)             Requested size: 242.10439pt x 306.20808pt.
- [5 <./generated/gradient.pdf> <./generated/robustness.pdf>] (./generated/table
-_scale.tex) [6]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-98.
+ [5 <./generated/ladder.pdf> <./generated/gradient.pdf>]
+(./generated/table_scale.tex) [6 <./generated/robustness.pdf>] [7]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 2
+00.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [7] (./main.bbl
+) (./main.bbl
 Underfull \hbox (badness 3579) in paragraph at lines 9--15
 \T1/cmr/m/n/10 bor-hood poverty and pedes-trian ex-po-sure in
  []
@@ -498,7 +512,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--92
 025.
  []
 
-) [8] [9
+[8]) [9
 
 ] [10] (./main.aux)
  ***********
@@ -506,16 +520,16 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 37BE25C59F0AE18DE175C60D181E4B4D;2815.
+(rerunfilecheck)             Checksum: F4DBDED6FC7F66936128E5EDF9498895;2744.
  ) 
 Here is how much of TeX's memory you used:
- 10437 strings out of 476106
- 158881 string characters out of 5793932
- 1945975 words of memory out of 5000000
- 32233 multiletter control sequences out of 15000+600000
- 570559 words of font info for 65 fonts, out of 8000000 for 9000
+ 10994 strings out of 476106
+ 165248 string characters out of 5793932
+ 1946975 words of memory out of 5000000
+ 32760 multiletter control sequences out of 15000+600000
+ 576824 words of font info for 90 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 75i,9n,79p,1482b,453s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,79p,1636b,577s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk> </
 root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </root/
 .texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </root/.texl
@@ -526,15 +540,18 @@ ar/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </root/.texlive2023/texmf-var/fo
 nts/pk/ljfour/jknappen/ec/ecrm0900.600pk> </root/.texlive2023/texmf-var/fonts/p
 k/ljfour/jknappen/ec/ecrm1200.600pk> </root/.texlive2023/texmf-var/fonts/pk/ljf
 our/jknappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on main.pdf (10 pages, 1095554 bytes).
+c/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib
+10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (10 pages, 1116284 bytes).
 PDF statistics:
- 859 PDF objects out of 1000 (max. 8388607)
- 301 compressed objects within 4 object streams
+ 874 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
  80 named destinations out of 1000 (max. 500000)
  181 words of extra memory for PDF output out of 10000 (max. 10000000)
 
