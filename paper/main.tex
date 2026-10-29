@@ -6,9 +6,14 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{enumitem}
 \usepackage{url}
 \usepackage[hidelinks]{hyperref}
 \usepackage[numbers,sort&compress]{natbib}
+
+\raggedbottom
+\setlist{itemsep=2pt,topsep=4pt,parsep=0pt,partopsep=0pt}
+\setlength{\bibsep}{2pt}
 
 % Revision marks: delete before submission.
 \newcommand{\todo}[1]{\textbf{[TODO: #1]}}
@@ -16,7 +21,7 @@
 \newcommand{\genfig}[1]{\IfFileExists{generated/#1.pdf}{\includegraphics[width=\columnwidth]{generated/#1.pdf}}{\fbox{\parbox{0.9\columnwidth}{Run \texttt{python -m nycped paper} to build #1.pdf.}}}}
 
 \title{Exposure-Adjusted Pedestrian Harm Is 16 Percent Higher per 10 Percentage Points of Neighborhood Poverty in New York City}
-\author{Aditya Bakshi\\\small Independent researcher}
+\author{Aditya Bakshi\\\small Cohere Labs Community}
 \date{Draft of \today}
 
 \begin{document}
@@ -205,32 +210,34 @@ We used Claude, a large language model from Anthropic, to help plan the analysis
 \section*{Acknowledgments}
 This work grew out of the Transportation Data Science Project Navigator pathway, a program of the Northeast Big Data Innovation Hub and the National Student Data Corps. We thank the program organizers and mentors for the training, data science framework, and guidance that shaped this analysis.
 
+\footnotesize
 \bibliographystyle{plainnat}
 \bibliography{references}
 
 \appendix
 \section{Tract-level models}
 \label{app:tract}
-Table~\ref{tab:tract} gives the tract-level models, which use the Milestone 5 tract table with crashes counted in tracts. Rate ratios are per 10 percentage points of poverty, from negative binomial regression with standard errors clustered by ZIP area. Models 3 and 4 treat crossing volume as an exposure offset. The data reject proportional risk, so we do not rely on them.
+Table~\ref{tab:tract} gives the tract-level models, with crashes counted in tracts. Rate ratios are per 10 percentage points of poverty, from negative binomial regression with standard errors clustered by ZIP area. Models 1 and 2 use residents as the exposure offset, and models 3 and 4 use crossing volume. Models 5 to 7 enter both as covariates. Controls are the tract commuting and land use measures. The data reject proportional risk, so we do not rely on them.
 
-\begin{table*}[t]
+\begin{table}[!ht]
 \centering
-\caption{Tract-level poverty rate ratios per 10 percentage points for pedestrian injuries and deaths.}
+\caption{Tract-level poverty rate ratios per 10 percentage points for pedestrian injuries and deaths, with 95\% intervals.}
 \label{tab:tract}
+\footnotesize\setlength{\tabcolsep}{3pt}
 \begin{tabular}{lcc}
 \toprule
 Model & Injuries & Deaths \\
 \midrule
-1\quad Residents as exposure, with controls & 1.05 (1.02 to 1.08) & 1.02 (0.92 to 1.12) \\
-2\quad Residents as exposure, no controls & 1.12 (1.08 to 1.17) & 1.00 (0.92 to 1.09) \\
-3\quad Crossing volume as exposure, with controls & 1.21 (1.16 to 1.25) & 1.17 (1.06 to 1.28) \\
-4\quad Crossing volume as exposure, no controls & 1.34 (1.28 to 1.39) & 1.19 (1.10 to 1.30) \\
-5\quad Residents and volume as covariates, with controls & 1.11 (1.08 to 1.15) & 1.08 (0.99 to 1.18) \\
-6\quad Same as 5, plus borough effects & 1.11 (1.08 to 1.15) & 1.11 (1.01 to 1.22) \\
-7\quad Same as 5, Staten Island excluded & 1.12 (1.08 to 1.15) & 1.07 (0.98 to 1.18) \\
+1\quad Residents offset, controls & 1.05 (1.02, 1.08) & 1.02 (0.92, 1.12) \\
+2\quad Residents offset, none & 1.12 (1.08, 1.17) & 1.00 (0.92, 1.09) \\
+3\quad Volume offset, controls & 1.21 (1.16, 1.25) & 1.17 (1.06, 1.28) \\
+4\quad Volume offset, none & 1.34 (1.28, 1.39) & 1.19 (1.10, 1.30) \\
+5\quad Both as covariates, controls & 1.11 (1.08, 1.15) & 1.08 (0.99, 1.18) \\
+6\quad Model 5 plus borough & 1.11 (1.08, 1.15) & 1.11 (1.01, 1.22) \\
+7\quad Model 5 without Staten Island & 1.12 (1.08, 1.15) & 1.07 (0.98, 1.18) \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\end{table}
 In models 5 and 6 the elasticities for injuries are 0.46 for population and 0.41 for crossing volume.
 
 \end{document}
