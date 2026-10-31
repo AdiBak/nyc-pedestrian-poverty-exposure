@@ -8,7 +8,7 @@ Exposure-Adjusted Pedestrian Harm Is 16 Percent Higher per 10 Percentage Points 
 
 **Authors**
 
-Aditya Bakshi (affiliation: Cohere Labs Community)
+Aditya Bakshi (affiliation: University of California, Irvine)
 
 **Abstract** (plain text, 1911 characters, shortened from the paper's abstract to fit arXiv's 1,920 character limit)
 
