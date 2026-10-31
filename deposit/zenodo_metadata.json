@@ -1,0 +1,12 @@
+{
+  "title": "Processed inputs for nycped: pedestrian harm crashes and census tract covariates, New York City, 2019 to 2023",
+  "upload_type": "dataset",
+  "creators": [{"name": "Bakshi, Aditya"}],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "description": "<p>Two processed input files for the nycped analysis of pedestrian harm and neighborhood poverty in New York City: a table of 37,815 pedestrian harm crashes (2019 to 2023) and a table of 2,189 census tracts with American Community Survey and land use covariates. See the README for columns, sources, and checksums.</p>",
+  "keywords": ["pedestrian safety", "New York City", "traffic crashes", "poverty", "census tracts"],
+  "related_identifiers": [
+    {"identifier": "10.5281/zenodo.23754868", "relation": "isSupplementTo", "scheme": "doi"}
+  ]
+}

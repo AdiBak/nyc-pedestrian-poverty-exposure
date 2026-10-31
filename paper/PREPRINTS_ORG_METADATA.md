@@ -24,6 +24,19 @@ pedestrian safety; traffic crashes; neighborhood poverty; pedestrian exposure; N
 
 The author declares no conflicts of interest.
 
+**Graphical abstract**
+
+`graphical_abstract.png` (the study sites map, 2100 by 1050 pixels).
+
+**Related websites**
+
+- https://github.com/AdiBak/nyc-pedestrian-poverty-exposure
+- https://doi.org/10.5281/zenodo.23754868
+
+**Manuscript contents the screeners look for**
+
+The first page carries the title, author, affiliation, corresponding author email, abstract, and keywords. The manuscript has a Conflicts of Interest section before the references and documents AI use in Methods (Use of generative AI).
+
 **Funding**
 
 Confirm before submitting. If there was none, enter "This research received no external funding."

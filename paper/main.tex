@@ -21,7 +21,7 @@
 \newcommand{\genfig}[1]{\IfFileExists{generated/#1.pdf}{\includegraphics[width=\columnwidth]{generated/#1.pdf}}{\fbox{\parbox{0.9\columnwidth}{Run \texttt{python -m nycped paper} to build #1.pdf.}}}}
 
 \title{Exposure-Adjusted Pedestrian Harm Is 16 Percent Higher per 10 Percentage Points of Neighborhood Poverty in New York City}
-\author{Aditya Bakshi\\\small Cohere Labs Community}
+\author{Aditya Bakshi\\\small Cohere Labs Community\\\small Corresponding author: \texttt{bakshia2@uci.edu}}
 
 \begin{document}
 \date{}
@@ -29,6 +29,9 @@
 
 \begin{abstract}
 Pedestrian injury and fatality rates are frequently reported to be elevated in lower-income neighborhoods, but population-based rates confound infrastructure hazards with variations in pedestrian exposure. We integrate modeled pedestrian volumes for New York City with street centerline geometry and five years of geocoded police-reported collision records (2019--2023). Crosswalk segments are identified and clustered into 41,937 discrete crossing sites, predominantly intersections, to which collisions are spatially assigned. Across 38,477 sites located in census tracts with complete covariate data, pedestrian injury and fatality collisions increase by 16\% per 10-percentage-point increase in the tract poverty rate (rate ratio [RR] 1.16, 95\% CI [1.12, 1.20]), conditioning on pedestrian crossing volume, roadway width, lane counts, posted speed limits, tract-level commuting mode shares, land use, and borough fixed effects. A model that holds only pedestrian volume fixed yields an RR of 1.30 (95\% CI [1.26, 1.35]). This gradient is robust to alternative count estimators, site grouping distances, collision assignment radii, temporal partitions, borough exclusions, clustered covariance structures, and a designated truck route control. The estimate attenuates to 1.10 with ZIP-code fixed effects and increases to 1.19--1.22 after correcting for American Community Survey sampling error in poverty estimates. Pedestrian fatalities show a similar, somewhat steeper gradient (RR 1.29, 95\% CI [1.17, 1.42]), arising from both higher collision frequency and a higher chance that a collision is fatal, although the second component is imprecise. Conventional models relying on residential population yield attenuated ratios of 1.06--1.09, indicating that the observed disparity is uncovered by exposure adjustment rather than by spatial aggregation. These estimates reflect observational associations in the absence of vehicle volume counts. An open-source pipeline is provided to reproduce all data processing, models, and figures from public records.
+
+\medskip
+\noindent\textbf{Keywords:} pedestrian safety; traffic crashes; neighborhood poverty; pedestrian exposure; New York City; Poisson regression
 \end{abstract}
 
 \section{Introduction}
@@ -111,6 +114,9 @@ We run the following checks, each with model D unless noted.
 \item \emph{Sampling error in poverty.} The ACS reports a margin of error for each tract. We treat the margin divided by 1.645 as a known standard error and extrapolate the coefficient back to zero error.
 \item \emph{Geographic scale.} We aggregate the same data to tracts, ZIP areas, and 100 random contiguous zonings at each of five target sizes \citep{fotheringham1991mup}, and we compare two model forms. One uses residents only (log population plus walking, transit, and commercial shares and borough). The other adds volume and street design.
 \end{itemize}
+
+\subsection{Use of generative AI}
+Generative AI was used throughout this work, in accordance with the policy of this platform. Claude, a large language model developed by Anthropic, assisted with planning the analysis, writing and testing the \texttt{nycped} software package and its unit tests, executing and checking intermediate results, and drafting and revising the manuscript text. The author specified the research question and the analytic decisions, ran the full pipeline on public data, reviewed the code, the outputs, and the manuscript, and verified every reported number against the generated outputs. The author takes full responsibility for the content of this paper, including the results and any remaining errors. No AI tool is listed as an author.
 
 \section{Results}
 \subsection{Plausibility of the volumes}
@@ -204,11 +210,11 @@ Pedestrian harm in New York City is higher at crossings in poorer neighborhoods,
 \section*{Code and data availability}
 All analysis code is in the \texttt{nycped} Python package \citep{nycped_code}, with unit tests, a command line, and a five step reproduction guide. The code is archived on Zenodo (\url{https://doi.org/10.5281/zenodo.23754868}). The package rebuilds the site table from three public sources (the NYC Walks supplementary network, the NYC street centerlines, and Census tract boundaries) and two small processed inputs, a tract table and a table of pedestrian harm crashes. The repository includes the script that regenerates both inputs from public sources. The NYC Walks files are not redistributed, since no license is stated. Readers should download them from the source cited in \citet{sevtsuk2026nycwalks}.
 
-\section*{AI Use}
-We used Claude, a large language model from Anthropic, to help plan the analysis, write and test parts of the code, check results, and draft and edit parts of this text. We reviewed the code and the text and take responsibility for all content, including the results and any errors.
-
 \section*{Acknowledgments}
 This work grew out of the Transportation Data Science Project Navigator pathway, a program of the Northeast Big Data Innovation Hub and the National Student Data Corps. We thank the program organizers and mentors for the training, data science framework, and guidance that shaped this analysis, as well as all authors of the work that this paper builds upon.
+
+\section*{Conflicts of Interest}
+The author declares no conflicts of interest.
 
 \footnotesize
 \bibliographystyle{plainnat}
