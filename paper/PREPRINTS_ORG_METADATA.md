@@ -31,7 +31,8 @@ The author declares no conflicts of interest.
 **Related websites**
 
 - https://github.com/AdiBak/nyc-pedestrian-poverty-exposure
-- https://doi.org/10.5281/zenodo.23754868
+- https://doi.org/10.5281/zenodo.23754868 (code)
+- https://doi.org/10.5281/zenodo.23841862 (processed inputs)
 
 **Manuscript contents the screeners look for**
 

@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1793429348.776 "main.aux" "main.bbl" "main" 1793469997.52782 0
+["bibtex main"] 1793470666.13536 "main.aux" "main.bbl" "main" 1793470666.66116 0
   "./references.bib" 1793253543.86538 5474 a5f93391143634562bc781fd1aac6b0e ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1793469997.43454 10315 66ace9f332f60ad3249e0f26f896925e "pdflatex"
+  "main.aux" 1793470666.58041 10315 d84bec82189476da9f8bfdfcb8444682 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1793469996.83023 "main.tex" "main.pdf" "main" 1793469997.528 0
+["pdflatex"] 1793470666.15125 "main.tex" "main.pdf" "main" 1793470666.66138 0
   "/etc/texmf/web2c/texmf.cnf" 1793082802 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk" 1793228068.09254 25396 f86302ba0f2862652efa99e0a015ec90 ""
   "/root/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1793228066.25029 31928 b6d7224c88d27b96fe48d90be095c002 ""
@@ -149,10 +149,10 @@
   "generated/robustness.pdf" 1793249653.48684 22666 add2e3b3fd4bc2fbb531c60912d9c8dc ""
   "generated/table_main.tex" 1793249653.48684 501 8cd4249bdae9d5582480ceba1bc0041a ""
   "generated/table_scale.tex" 1793249653.48684 731 a3fe24d26caf740971afff33ef899063 ""
-  "main.aux" 1793469997.43454 10315 66ace9f332f60ad3249e0f26f896925e "pdflatex"
-  "main.bbl" 1793429348.7875 5540 8bf9b83ac6092b46eb9a3c6df1f36d3f "bibtex main"
-  "main.out" 1793469997.43454 2911 868e15b864a30c5a9df68af450049f2c "pdflatex"
-  "main.tex" 1793469996.33454 34849 9cc852d6f990e8863eb374f69d974b16 ""
+  "main.aux" 1793470666.58041 10315 d84bec82189476da9f8bfdfcb8444682 "pdflatex"
+  "main.bbl" 1793470666.14896 5540 8bf9b83ac6092b46eb9a3c6df1f36d3f "bibtex main"
+  "main.out" 1793470666.58041 2911 868e15b864a30c5a9df68af450049f2c "pdflatex"
+  "main.tex" 1793470665.25403 34933 da9b11016aa88eddaadedb7280b07f29 ""
   (generated)
   "main.aux"
   "main.log"

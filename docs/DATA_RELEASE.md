@@ -1,6 +1,6 @@
 # Data release notes
 
-These notes describe the two processed input files that the `nycped` package reads, and what goes into a public data deposit (for example on Zenodo) at submission.
+These notes describe the two processed input files that the `nycped` package reads. They are deposited at https://doi.org/10.5281/zenodo.23841862.
 
 ## Files in the deposit
 
